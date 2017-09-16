@@ -12,23 +12,23 @@ const sailboatSchema = mongoose.Schema({
     zipcode: String,
     country: String,
   },
+  name: String,
   description: String, 
   year: Number, 
   condition: String,
   visible: Boolean, 
-  forSale: Boolean, 
+  forSale: Boolean
 });
 
-
-blogPostSchema.virtual('ownerName').get(function() {
+sailboatSchema.virtual('ownerName').get(function() {
   return `${this.owner.firstName} ${this.owner.lastName}`.trim();
 });
 
-blogPostSchema.virtual('addressString').get(function() {
+sailboatSchema.virtual('addressString').get(function() {
   return `${this.address.street}, ${this.address.city}, ${this.address.state}, ${this.address.zipcode}, ${this.address.country}`;
 });
 
-blogPostSchema.methods.simpleSailboat = function() {
+sailboatSchema.methods.simpleSailboat = function() {
   return {
     id: this._id,
     owner: this.ownerName,
@@ -41,7 +41,7 @@ blogPostSchema.methods.simpleSailboat = function() {
   };
 }
 
-const Sailboat = mongoose.model('Sailboat', blogPostSchema);
+const Sailboat = mongoose.model('Sailboat', sailboatSchema);
 //for test purposes
 
 module.exports = {Sailboat};

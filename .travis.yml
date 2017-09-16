@@ -9,3 +9,4 @@ deploy:
   app: sailboat-registry
   on: 
     repo: Daniel-Slabaugh/sailboat-registry
+  skip_cleanup: true

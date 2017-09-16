@@ -8,4 +8,4 @@ deploy:
     secure: 332ba3ad-bb27-409e-bc83-816d6e7c0cb4
   app: sailboat-registry
   on: 
-    repo: daniel-slabaugh/sailboat-registry
+    repo: Daniel-Slabaugh/sailboat-registry

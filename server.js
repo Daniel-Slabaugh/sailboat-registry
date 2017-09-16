@@ -10,10 +10,13 @@ const {Sailboats} = require('./models');
 
 const app = express();
 
+mongoose.Promise = global.Promise;
+
+const sailboatRouter = require('./sailboatRouter');
+
 app.use(morgan('common'));
 app.use(bodyParser.json());
-
-mongoose.Promise = global.Promise;
+app.use('/sailboats', sailboatRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello world from sailboat registry');

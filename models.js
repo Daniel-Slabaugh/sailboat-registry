@@ -28,4 +28,4 @@ blogPostSchema.methods.apiRepr = function() {
 const BlogPost = mongoose.model('BlogPost', blogPostSchema);
 //for test purposes
 
-module.exports = {BlogPost};
+module.exports = {Sailboats};

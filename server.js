@@ -6,20 +6,17 @@ const morgan = require('morgan');
 
 const {DATABASE_URL, PORT} = require('./config');
 const {Sailboats} = require('./models');
+const sailboatRouter = require('./sailboatRouter');
 
 const app = express();
 
 mongoose.Promise = global.Promise;
 
-const sailboatRouter = require('./sailboatRouter');
-
+app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use('/sailboats', sailboatRouter);
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello world from sailboat registry');
-});
 
 let server;
 
@@ -46,15 +43,15 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
 // use it in our integration tests later.
 function closeServer() {
   return mongoose.disconnect().then(() => {
-     return new Promise((resolve, reject) => {
-       console.log('Closing server');
-       server.close(err => {
-           if (err) {
-               return reject(err);
-           }
-           resolve();
-       });
-     });
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
   });
 }
 

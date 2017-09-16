@@ -65,15 +65,15 @@ describe('Sailboat server resource', function() {
 
   describe('GET endpoint', function() {
 
-    it('simple get should work', function() {
-      let res;
-      return chai.request(app)
-        .get('/')
-        .then(_res => {
-          res = _res;
-          res.should.have.status(200);
-        })
-    });
+    // it('simple get should work', function() {
+    //   let res;
+    //   return chai.request(app)
+    //     .get('/')
+    //     .then(_res => {
+    //       res = _res;
+    //       res.should.have.status(200);
+    //     })
+    // });
 
     it('should return sailboats in database', function() {
       let res;

@@ -5,7 +5,6 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 
 
-
 const {DATABASE_URL} = require('../config');
 const {Sailboat} = require('../models');
 const {closeServer, runServer, app} = require('../server');
@@ -30,12 +29,22 @@ function seedSailboatData() {
   for (let i=1; i<=10; i++) {
     seedData.push({
       owner: {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName()
+        first: faker.name.firstName(),
+        last: faker.name.lastName()
+      },
+      address: {
+        street: faker.address.streetAddress(),
+        city: faker.address.city(),
+        state: faker.address.state(),
+        zipcode: faker.address.zipCode(),
+        country: faker.address.country()
       },
       name: faker.name.firstName(),
       discription: faker.lorem.sentence(),
-      content: faker.lorem.text()
+      condition: faker.random.words(),
+      year: faker.date.past(),
+      visible: faker.random.boolean(),
+      forSale: faker.random.boolean()
     });
   }
   // this will return a promise
@@ -75,15 +84,7 @@ describe('Sailboat server resource', function() {
     //     })
     // });
 
-    it('should return sailboats in database', function() {
-      let res;
-      return chai.request(app)
-        .get('/')
-        .then(_res => {
-          res = _res;
-          res.should.have.status(200);
-        })
-    });
+
 
     it('should return all existing sailboats', function() {
       let res;
@@ -103,6 +104,60 @@ describe('Sailboat server resource', function() {
           res.body.should.have.length(count);
         });
     });
+
+  describe('POST endpoint', function() {
+
+    it('should add a new sailboat', function() {
+
+      const newSailboat =  {     
+        owner: {
+          first: faker.name.firstName(),
+          last: faker.name.lastName()
+        },
+        address: {
+          street: faker.address.streetAddress(),
+          city: faker.address.city(),
+          state: faker.address.state(),
+          zipcode: faker.address.zipCode(),
+          country: faker.address.country()
+        },
+        name: faker.random.words(),
+        discription: faker.lorem.sentence(),
+        condition: faker.random.words(),
+        year: faker.date.past(),
+        visible: faker.random.boolean(),
+        forSale: faker.random.boolean()
+      }
+
+      return chai.request(app)
+        .post('/sailboats')
+        .send(newSailboat)
+        .then(function(res) {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.include.keys('id', 'owner', 'address', 'name', 'discription', 'condition', 'year', 'visible', 'forSale');
+          res.body.owner.should.equal(
+            `${newSailboat.owner.first} ${newSailboat.owner.last}`);
+          res.body.id.should.not.be.null;
+          res.body.name.should.equal(newSailboat.name);
+          res.body.discription.should.equal(newSailboat.discription);
+
+          return Sailboat.findById(res.body.id);
+        })
+        .then(function(sailboat) {
+          sailboat.owner.first.should.equal(newSailboat.owner.first);
+          sailboat.owner.last.should.equal(newSailboat.owner.last);
+          // sailboat.address.should.equal(newSailboat.address);
+          sailboat.name.should.equal(newSailboat.name);
+          sailboat.discription.should.equal(newSailboat.discription);
+          sailboat.condition.should.equal(newSailboat.condition);
+          sailboat.visible.should.equal(newSailboat.visible);
+          sailboat.forSale.should.equal(newSailboat.forSale);
+        });
+    });
+  });
+
 
   });
 });

@@ -55,6 +55,11 @@ function closeServer() {
   });
 }
 
+
+app.use('*', function(req, res) {
+  res.status(404).json({message: 'Not Found, you idiot'});
+});
+
 // if server.js is called directly (aka, with `node server.js`), this block
 // runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {

@@ -156,60 +156,85 @@ describe('Sailboat server resource', function() {
           sailboat.forSale.should.equal(newSailboat.forSale);
         });
     });
-
-
-
-
   });
 
   describe('PUT endpoint', function() {
 
-  // strategy:
-  //  1. Get an existing restaurant from db
-  //  2. Make a PUT request to update that restaurant
-  //  3. Prove restaurant returned by request contains data we sent
-  //  4. Prove restaurant in db is correctly updated
-  it('should update fields you send over', function() {
-    const updateData = {
-      address: {
-        street: faker.address.streetAddress(),
-        city: faker.address.city(),
-        zipcode: faker.address.zipCode(),
-        state: faker.address.state(),
-        country: faker.address.country()
-      },
-      name: faker.name.firstName(),
-      discription: faker.lorem.sentence(),
-      condition: faker.random.words(), 
-      visible: faker.random.boolean(),
-      forSale: faker.random.boolean(),
-    };
+    it('should update fields you send over', function() {
+      const updateData = {
+        address: {
+          street: faker.address.streetAddress(),
+          city: faker.address.city(),
+          zipcode: faker.address.zipCode(),
+          state: faker.address.state(),
+          country: faker.address.country()
+        },
+        name: faker.name.firstName(),
+        discription: faker.lorem.sentence(),
+        condition: faker.random.words(), 
+        visible: faker.random.boolean(),
+        forSale: faker.random.boolean(),
+      };
 
-    return Sailboat
-      .findOne()
-      .exec()
-      .then(function(sailboat) {
-        updateData.id = sailboat.id;
+      return Sailboat
+        .findOne()
+        .exec()
+        .then(function(sailboat) {
+          updateData.id = sailboat.id;
 
-        return chai.request(app)
-          .put(`/sailboats/${sailboat.id}`)
-          .send(updateData);
-      })
-      .then(function(res) {
-        res.should.have.status(204);
+          return chai.request(app)
+            .put(`/sailboats/${sailboat.id}`)
+            .send(updateData);
+        })
+        .then(function(res) {
+          res.should.have.status(204);
 
-        return Sailboat.findById(updateData.id).exec();
-      })
-      .then(function(sailboat) {
-        // sailboat.address.should.equal(newSailboat.address);
-        sailboat.name.should.equal(updateData.name);
-        sailboat.discription.should.equal(updateData.discription);
-        sailboat.condition.should.equal(updateData.condition);
-        sailboat.visible.should.equal(updateData.visible);
-        sailboat.forSale.should.equal(updateData.forSale);
-      });
+          return Sailboat.findById(updateData.id).exec();
+        })
+        .then(function(sailboat) {
+          // sailboat.address.should.equal(newSailboat.address);
+          sailboat.name.should.equal(updateData.name);
+          sailboat.discription.should.equal(updateData.discription);
+          sailboat.condition.should.equal(updateData.condition);
+          sailboat.visible.should.equal(updateData.visible);
+          sailboat.forSale.should.equal(updateData.forSale);
+        });
     });
-});
+  });
+
+  describe('DELETE endpoint', function() {
+    // strategy:
+    //  1. get a restaurant
+    //  2. make a DELETE request for that restaurant's id
+    //  3. assert that response has right status code
+    //  4. prove that restaurant with the id doesn't exist in db anymore
+    it('delete a sailboat by id', function() {
+
+      let sailboat;
+
+      return Sailboat
+        .findOne()
+        .exec()
+        .then(function(_sailboat) {
+          sailboat = _sailboat;
+          return chai.request(app).delete(`/sailboats/${sailboat.id}`);
+        })
+        .then(function(res) {
+          res.should.have.status(204);
+          return Sailboat
+            .findById(sailboat.id)
+            .exec();
+        })
+        .then(function(_sailboat) {
+          // when a variable's value is null, chaining `should`
+          // doesn't work. so `_restaurant.should.be.null` would raise
+          // an error. `should.be.null(_restaurant)` is how we can
+          // make assertions about a null value.
+          should.not.exist(_sailboat);
+        });
+    });
+  });
+
 
   });
 });

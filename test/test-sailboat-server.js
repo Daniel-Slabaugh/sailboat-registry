@@ -104,6 +104,7 @@ describe('Sailboat server resource', function() {
           res.body.should.have.length(count);
         });
     });
+  });
 
   describe('POST endpoint', function() {
 
@@ -233,9 +234,6 @@ describe('Sailboat server resource', function() {
           should.not.exist(_sailboat);
         });
     });
-  });
-
-
   });
 });
 

@@ -12,20 +12,48 @@
 </head>
 <body class="container">
 
-    <div class="row" id="landing-page">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-        <form id="start">
-          <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-              <h2 class="text-center">Welcome to your sailboat's home!</h2> 
-              <button class="btn btn-primary btn-block btn-login" type="submit">Login</button>
-              <button class="btn btn-primary btn-block btn-signup" type="submit">Sign Up</button>
-            </div> <!-- col -->
-          </div> <!-- row -->
-        </form>
-      </div> <!-- col -->
-    </div> <!-- row landing-page -->
+  <div class="row" id="landing-page">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <h2 class="text-center">Welcome to your sailboat's home!</h2> 
+      <form id="start">
+        <div class="form-group">
+          <label for="userName">User Name</label>
+          <input type="text" class="form-control" name="userName" id="userName" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" name="password" id="password" required>
+        </div>         
+        <button class="btn btn-primary btn-block" type="submit">Login</button>
+        <button class="btn btn-primary btn-block" id="btn-signup" type="button">Sign Up</button>
+      </form>
+    </div> <!-- col landing page -->
+  </div> <!-- row landing-page -->
 
+  <div class="row" id="signup-page">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <h2 class="text-center">New user? Please sign up.</h2> 
+      <form id="signup">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" name="userName" id="userName" required>
+        </div>        
+        <div class="form-group">
+          <label for="userName">User Name</label>
+          <input type="text" class="form-control" name="userName" id="userName" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" name="userName" id="password" required>
+        </div>
+        <div class="form-group">
+          <label for="password2">Re-enter Password</label>
+          <input type="text" class="form-control" name="password2" id="password2" required>
+        </div>         
+        <button class="btn btn-primary btn-block" type="submit">Login</button>
+      </form>
+    </div> <!-- col landing page -->
+  </div> <!-- row landing-page -->
 
 </body>
 </html>  

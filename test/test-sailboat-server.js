@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 
 const {DATABASE_URL} = require('../config');
-const {Sailboat} = require('../models');
+const {Sailboat} = require('../sailboats');
 const {closeServer, runServer, app} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
 

@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const {DATABASE_URL, PORT} = require('./config');
-const {Sailboats} = require('./models');
-const sailboatRouter = require('./sailboatRouter');
+// const {Sailboats} = require('./models');
+const {router: sailboatRouter, Sailboats} = require('./sailboats');
+// const sailboatRouter = require('./sailboatRouter');
 
 const app = express();
 

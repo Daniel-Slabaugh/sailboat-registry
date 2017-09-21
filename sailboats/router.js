@@ -22,19 +22,19 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const requiredFields = ['first', 'last'];
+  const requiredFields = ['name', 'discription'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
-    if (!(field in req.body.owner)) {
+    if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`
       console.error(message);
       return res.status(400).send(message);
     }
   }
-
   Sailboat
     .create({
       owner: req.body.owner,
+      // owner.last: req.body.owner.last,
       address: req.body.address,
       name: req.body.name,
       discription: req.body.discription,

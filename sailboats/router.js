@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const requiredFields = ['name', 'discription'];
+  const requiredFields = ['name', 'description'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
       // owner.last: req.body.owner.last,
       address: req.body.address,
       name: req.body.name,
-      discription: req.body.discription,
+      description: req.body.description,
       year: req.body.year,
       condition: req.body.condition,
       visible: req.body.visible,
@@ -61,7 +61,7 @@ router.put('/:id', (req, res) => {
   }
 
   const toUpdate = {};
-  const updateableFields = ['address', 'name', 'discription', 'year', 'condition', 'visible', 'forSale'];
+  const updateableFields = ['address', 'name', 'description', 'year', 'condition', 'visible', 'forSale'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {

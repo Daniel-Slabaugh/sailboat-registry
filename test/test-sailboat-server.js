@@ -40,7 +40,7 @@ function seedSailboatData() {
         country: faker.address.country()
       },
       name: faker.name.firstName(),
-      discription: faker.lorem.sentence(),
+      description: faker.lorem.sentence(),
       condition: faker.random.words(),
       year: faker.date.past(),
       visible: faker.random.boolean(),
@@ -123,7 +123,7 @@ describe('Sailboat server resource', function() {
           country: faker.address.country()
         },
         name: faker.random.words(),
-        discription: faker.lorem.sentence(),
+        description: faker.lorem.sentence(),
         condition: faker.random.words(),
         year: faker.date.past(),
         visible: faker.random.boolean(),
@@ -137,12 +137,12 @@ describe('Sailboat server resource', function() {
           res.should.have.status(201);
           res.should.be.json;
           res.body.should.be.a('object');
-          res.body.should.include.keys('id', 'owner', 'address', 'name', 'discription', 'condition', 'year', 'visible', 'forSale');
+          res.body.should.include.keys('id', 'owner', 'address', 'name', 'description', 'condition', 'year', 'visible', 'forSale');
           res.body.owner.should.equal(
             `${newSailboat.owner.first} ${newSailboat.owner.last}`);
           res.body.id.should.not.be.null;
           res.body.name.should.equal(newSailboat.name);
-          res.body.discription.should.equal(newSailboat.discription);
+          res.body.description.should.equal(newSailboat.description);
 
           return Sailboat.findById(res.body.id);
         })
@@ -151,7 +151,7 @@ describe('Sailboat server resource', function() {
           sailboat.owner.last.should.equal(newSailboat.owner.last);
           // sailboat.address.should.equal(newSailboat.address);
           sailboat.name.should.equal(newSailboat.name);
-          sailboat.discription.should.equal(newSailboat.discription);
+          sailboat.description.should.equal(newSailboat.description);
           sailboat.condition.should.equal(newSailboat.condition);
           sailboat.visible.should.equal(newSailboat.visible);
           sailboat.forSale.should.equal(newSailboat.forSale);
@@ -171,7 +171,7 @@ describe('Sailboat server resource', function() {
           country: faker.address.country()
         },
         name: faker.name.firstName(),
-        discription: faker.lorem.sentence(),
+        description: faker.lorem.sentence(),
         condition: faker.random.words(), 
         visible: faker.random.boolean(),
         forSale: faker.random.boolean(),
@@ -195,7 +195,7 @@ describe('Sailboat server resource', function() {
         .then(function(sailboat) {
           // sailboat.address.should.equal(newSailboat.address);
           sailboat.name.should.equal(updateData.name);
-          sailboat.discription.should.equal(updateData.discription);
+          sailboat.description.should.equal(updateData.description);
           sailboat.condition.should.equal(updateData.condition);
           sailboat.visible.should.equal(updateData.visible);
           sailboat.forSale.should.equal(updateData.forSale);

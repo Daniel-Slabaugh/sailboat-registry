@@ -41,7 +41,7 @@ passport.use(jwtStrategy);
 
 // A protected endpoint which needs a valid JWT to access it
 app.get(
-    '/api/protected',
+    '/protected',
     passport.authenticate('jwt', {session: false}),
     (req, res) => {
         return res.json({

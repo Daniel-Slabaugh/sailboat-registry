@@ -43,11 +43,11 @@ describe('Auth endpoints', function() {
         return User.remove({});
     });
 
-    describe('/api/auth/login', function() {
+    describe('/auth/login', function() {
         it('Should reject requests with no credentials', function() {
             return chai
                 .request(app)
-                .post('/api/auth/login')
+                .post('/auth/login')
                 .then(() =>
                     expect.fail(null, null, 'Request should not succeed')
                 )
@@ -63,7 +63,7 @@ describe('Auth endpoints', function() {
         it('Should reject requests with incorrect usernames', function() {
             return chai
                 .request(app)
-                .post('/api/auth/login')
+                .post('/auth/login')
                 .auth('wrongUsername', password)
                 .then(() =>
                     expect.fail(null, null, 'Request should not succeed')
@@ -80,7 +80,7 @@ describe('Auth endpoints', function() {
         it('Should reject requests with incorrect passwords', function() {
             return chai
                 .request(app)
-                .post('/api/auth/login')
+                .post('/auth/login')
                 .auth(username, 'wrongPassword')
                 .then(() =>
                     expect.fail(null, null, 'Request should not succeed')
@@ -97,7 +97,7 @@ describe('Auth endpoints', function() {
         it('Should return a valid auth token', function() {
             return chai
                 .request(app)
-                .post('/api/auth/login')
+                .post('/auth/login')
                 .auth(username, password)
                 .then(res => {
                     expect(res).to.have.status(200);
@@ -116,11 +116,11 @@ describe('Auth endpoints', function() {
         });
     });
 
-    describe('/api/auth/refresh', function() {
+    describe('/auth/refresh', function() {
         it('Should reject requests with no credentials', function() {
             return chai
                 .request(app)
-                .post('/api/auth/refresh')
+                .post('/auth/refresh')
                 .then(() =>
                     expect.fail(null, null, 'Request should not succeed')
                 )
@@ -149,7 +149,7 @@ describe('Auth endpoints', function() {
 
             return chai
                 .request(app)
-                .post('/api/auth/refresh')
+                .post('/auth/refresh')
                 .set('Authorization', `Bearer ${token}`)
                 .then(() =>
                     expect.fail(null, null, 'Request should not succeed')
@@ -182,7 +182,7 @@ describe('Auth endpoints', function() {
 
             return chai
                 .request(app)
-                .post('/api/auth/refresh')
+                .post('/auth/refresh')
                 .set('authorization', `Bearer ${token}`)
                 .then(() =>
                     expect.fail(null, null, 'Request should not succeed')
@@ -216,7 +216,7 @@ describe('Auth endpoints', function() {
 
             return chai
                 .request(app)
-                .post('/api/auth/refresh')
+                .post('/auth/refresh')
                 .set('authorization', `Bearer ${token}`)
                 .then(res => {
                     expect(res).to.have.status(200);

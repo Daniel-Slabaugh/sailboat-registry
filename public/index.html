@@ -119,33 +119,46 @@
 
     <div class="row" id="register-sailboat-page">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-        <h2 class="text-center">New user? Please sign up to enter paradise.</h2> 
+        <h2 class="text-center">Register your Sailboat</h2> 
         <form id="register-sailboat">
           <div class="form-group">
-            <label for="name">First Name</label>
-            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="ilovesailboats@water.com" required>
+            <label for="name">Sailboat Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Carumba" required>
           </div>        
           <div class="form-group">
-            <label for="description">Last Name</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="UserName" required>
+            <label for="description">Describe your boat</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Hobie Cat 16" required>
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" placeholder="ilovesailboats@water.com" required>
-          </div>        
+            <label for="condiditon">Condition</label>
+            <input type="text" class="form-control" name="condition" id="condition" placeholder="Good/Fair" required>
+          </div>  
           <div class="form-group">
-            <label for="userName">User Name</label>
-            <input type="text" class="form-control" name="userName" id="userName" placeholder="UserName" required>
-          </div>
+            <label for="year">Year</label>
+            <input type="text" class="form-control" name="year" id="year" placeholder="1984" required>
+          </div>  
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Password" required>
-          </div>    
-          <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+            <label for="visible">Do you want this boat to be visible to other users?</label>
+            <div class="visible">
+              <label><input type="radio" name="optradio">Yes</label>
+            </div>
+            <div class="visible">
+              <label><input type="radio" name="optradio">No</label>
+              </div>
+          </div>      
+          <div class="form-group">
+            <label for="forSale">Is this boat for sale?</label>
+            <div class="forSale">
+              <label><input type="radio" name="optradio">Yes</label>
+            </div>
+            <div class="forSale">
+              <label><input type="radio" name="optradio">No</label>
+            </div>s
+          </div>  
+          <button class="btn btn-primary btn-block" type="submit">Register Sailboat</button>
         </form>
       </div> <!-- col signup page -->
     </div> <!-- row signup-page -->
-
 
 
 

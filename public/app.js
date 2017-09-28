@@ -3,6 +3,8 @@ $(document).ready(function() {
 
   $("#signup-page").hide();
   $("#home-page").hide();
+  $("#register-sailboat-page").hide();
+  
 
 
   $("#btn-signup").click(function(e) {
@@ -23,12 +25,13 @@ $(document).ready(function() {
     user.firstName = $("#firstName").val().trim();
     user.lastName = $("#lastName").val().trim();
     // user.email = $("#email").val();
-    user.name = $("#userName").val().trim();
+    user.username = $("#userName").val().trim();
     user.password = $("#password").val().trim();
     serverRequest(user);
   });
 });
 
+//original function
 function serverRequest(user) {
   console.log(JSON.stringify(user));
   var settings = {
@@ -36,7 +39,7 @@ function serverRequest(user) {
     data: JSON.stringify(user),
     dataType: 'json',
     type: 'POST',
-    success: function() {
+    success: function(test) {
       $("#signup-page").hide();
       $("#home-page").show();
     }

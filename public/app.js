@@ -4,8 +4,6 @@ $(document).ready(function() {
   $("#signup-page").hide();
   $("#home-page").hide();
   $("#register-sailboat-page").hide();
-  
-
 
   $("#btn-signup").click(function(e) {
     e.preventDefault();
@@ -37,7 +35,7 @@ function serverRequest(user) {
   var settings = {
     url: "/users",
     data: JSON.stringify(user),
-    dataType: 'json',
+    contentType: 'application/json',
     type: 'POST',
     success: function(test) {
       $("#signup-page").hide();

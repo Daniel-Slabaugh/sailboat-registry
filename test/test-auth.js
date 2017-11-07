@@ -17,8 +17,7 @@ chai.use(chaiHttp);
 describe('Auth endpoints', function() {
     const username = 'exampleUser';
     const password = 'examplePass';
-    const firstName = 'Example';
-    const lastName = 'User';
+    const name = 'Example';
 
     before(function() {
         return runServer();
@@ -33,8 +32,7 @@ describe('Auth endpoints', function() {
             User.create({
                 username,
                 password,
-                firstName,
-                lastName
+                name
             })
         );
     });
@@ -109,8 +107,7 @@ describe('Auth endpoints', function() {
                     });
                     expect(payload.user).to.deep.equal({
                         username,
-                        firstName,
-                        lastName
+                        name
                     });
                 });
         });
@@ -137,8 +134,7 @@ describe('Auth endpoints', function() {
             const token = jwt.sign(
                 {
                     username,
-                    firstName,
-                    lastName
+                    name
                 },
                 'wrongSecret',
                 {
@@ -168,8 +164,7 @@ describe('Auth endpoints', function() {
                 {
                     user: {
                         username,
-                        firstName,
-                        lastName
+                        name
                     },
                     exp: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
                 },
@@ -201,8 +196,7 @@ describe('Auth endpoints', function() {
                 {
                     user: {
                         username,
-                        firstName,
-                        lastName
+                        name
                     }
                 },
                 JWT_SECRET,
@@ -228,8 +222,7 @@ describe('Auth endpoints', function() {
                     });
                     expect(payload.user).to.deep.equal({
                         username,
-                        firstName,
-                        lastName
+                        name
                     });
                     expect(payload.exp).to.be.at.least(decoded.exp);
                 });

@@ -28,10 +28,7 @@ function seedSailboatData() {
   const seedData = [];
   for (let i=1; i<=10; i++) {
     seedData.push({
-      owner: {
-        first: faker.name.firstName(),
-        last: faker.name.lastName()
-      },
+      owner: faker.name.firstName(),
       address: {
         street: faker.address.streetAddress(),
         city: faker.address.city(),
@@ -111,10 +108,7 @@ describe('Sailboat server resource', function() {
     it('should add a new sailboat', function() {
 
       const newSailboat =  {     
-        owner: {
-          first: faker.name.firstName(),
-          last: faker.name.lastName()
-        },
+        owner: faker.name.firstName(),
         address: {
           street: faker.address.streetAddress(),
           city: faker.address.city(),
@@ -138,8 +132,7 @@ describe('Sailboat server resource', function() {
           res.should.be.json;
           res.body.should.be.a('object');
           res.body.should.include.keys('id', 'owner', 'address', 'name', 'description', 'condition', 'year', 'visible', 'forSale');
-          res.body.owner.should.equal(
-            `${newSailboat.owner.first} ${newSailboat.owner.last}`);
+          res.body.owner.should.equal(newSailboat.owner)
           res.body.id.should.not.be.null;
           res.body.name.should.equal(newSailboat.name);
           res.body.description.should.equal(newSailboat.description);
@@ -147,8 +140,7 @@ describe('Sailboat server resource', function() {
           return Sailboat.findById(res.body.id);
         })
         .then(function(sailboat) {
-          sailboat.owner.first.should.equal(newSailboat.owner.first);
-          sailboat.owner.last.should.equal(newSailboat.owner.last);
+          sailboat.owner.should.equal(newSailboat.owner);
           // sailboat.address.should.equal(newSailboat.address);
           sailboat.name.should.equal(newSailboat.name);
           sailboat.description.should.equal(newSailboat.description);

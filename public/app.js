@@ -5,11 +5,6 @@ $(document).ready(function() {
   $("#home-page").hide();
   $("#register-sailboat-page").hide();
   $("#topnav").hide();
-  $("#home-page").hide();
-  $("#home-page").hide();
-
-  
-
 
   $("#btn-signup").click(function(e) {
     e.preventDefault();

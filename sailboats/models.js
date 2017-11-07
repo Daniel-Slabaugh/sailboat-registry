@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const sailboatSchema = mongoose.Schema({
-  owner: {
-    first: {type: String, required: true},
-    last: {type: String, required: true},
-  },
+  owner: {required: true, type: String},
   address: {
     street: String,
     city: String,
@@ -20,10 +17,6 @@ const sailboatSchema = mongoose.Schema({
   forSale: Boolean
 });
 
-sailboatSchema.virtual('ownerName').get(function() {
-  return `${this.owner.first} ${this.owner.last}`.trim();
-});
-
 sailboatSchema.virtual('addressString').get(function() {
   return `${this.address.street}, ${this.address.city}, ${this.address.state}, ${this.address.zipcode}, ${this.address.country}`;
 });
@@ -31,7 +24,7 @@ sailboatSchema.virtual('addressString').get(function() {
 sailboatSchema.methods.simpleSailboat = function() {
   return {
     id: this._id,
-    owner: this.ownerName,
+    owner: this.owner,
     address: this.addressString,
     name: this.name,
     description: this.description, 

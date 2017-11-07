@@ -4,6 +4,10 @@ $(document).ready(function() {
   $("#signup-page").hide();
   $("#home-page").hide();
   $("#register-sailboat-page").hide();
+  $("#topnav").hide();
+  $("#home-page").hide();
+  $("#home-page").hide();
+
   
 
 

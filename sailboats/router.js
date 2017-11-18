@@ -3,12 +3,14 @@ const router = express.Router();
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-
+const passport = require('passport');
 
 const {Sailboat} = require('./models');
 
 
-router.get('/', (req, res) => {
+router.get('/',
+  passport.authenticate('jwt', {session: false}), 
+  (req, res) => {
   Sailboat
     .find()
     .exec()
@@ -21,8 +23,10 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
-  const requiredFields = ['name', 'description'];
+router.post('/',
+  passport.authenticate('jwt', {session: false}), 
+  (req, res) => {
+  const requiredFields = ['owner', 'name', 'description'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -34,13 +38,11 @@ router.post('/', (req, res) => {
   Sailboat
     .create({
       owner: req.body.owner,
-      // owner.last: req.body.owner.last,
       address: req.body.address,
       name: req.body.name,
       description: req.body.description,
       year: req.body.year,
       condition: req.body.condition,
-      visible: req.body.visible,
       forSale: req.body.forSale
     })
     .then(Sailboat => res.status(201).json(Sailboat.simpleSailboat()))
@@ -50,7 +52,9 @@ router.post('/', (req, res) => {
   });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id',
+  passport.authenticate('jwt', {session: false}), 
+  (req, res) => {
   // ensure that the id in the request path and the one in request body match
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
@@ -61,7 +65,7 @@ router.put('/:id', (req, res) => {
   }
 
   const toUpdate = {};
-  const updateableFields = ['address', 'name', 'description', 'year', 'condition', 'visible', 'forSale'];
+  const updateableFields = ['address', 'name', 'description', 'year', 'condition', 'forSale'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {
@@ -77,7 +81,9 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id',
+  passport.authenticate('jwt', {session: false}), 
+  (req, res) => {
   Sailboat
     .findByIdAndRemove(req.params.id)
     .exec()

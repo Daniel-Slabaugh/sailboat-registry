@@ -13,7 +13,6 @@ const sailboatSchema = mongoose.Schema({
   description: String, 
   year: Date, 
   condition: String,
-  visible: Boolean, 
   forSale: Boolean
 });
 
@@ -30,7 +29,6 @@ sailboatSchema.methods.simpleSailboat = function() {
     description: this.description, 
     year: this.year, 
     condition: this.condition,
-    visible: this.visible, 
     forSale: this.forSale
   };
 }

@@ -22,9 +22,23 @@ $(document).ready(function() {
     e.preventDefault();
     let user = {};
     user.name = $("#name").val().trim();
-    user.username = $("#email").val();
+    user.username = $("#email").val().trim();
     user.password = $("#password").val().trim();
     registerUser(user);
+  });
+
+  $("#register-sailboat").submit(function(e) {
+    e.preventDefault();
+    let sailboat = {};
+    sailboat.name = $("#name").val().trim();
+    sailboat.owner = $("#owner").val().trim();
+    sailboat.description = $("#description").val().trim();
+    sailboat.condition = $("#condition").val().trim();
+    sailboat.year = $("#year").val().trim();
+    sailboat.name = $("#name").val().trim();
+    sailboat.name = $("#name").val().trim();
+    sailboat.name = $("#name").val().trim();
+    createSailboat(sailboat);
   });
 });
 
@@ -65,7 +79,7 @@ function loginUser(user) {
   $.ajax(settings);
 }
 
-function registerSailboat(sailboat) {
+function createSailboat(sailboat) {
   var token = localStorage.getItem("authToken");
   var settings = {
     url: "/sailboat",
@@ -79,5 +93,4 @@ function registerSailboat(sailboat) {
     error: function (err) {}
   };
   $.ajax(settings);
-} 
-
+}

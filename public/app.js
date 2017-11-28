@@ -1,4 +1,11 @@
 
+var state = {
+  register:true,
+  longitude:0,
+  latitude:0,
+  sailboats:[]
+};
+
 $(document).ready(function() {
 
   $("#signup-page").hide();
@@ -12,10 +19,12 @@ $(document).ready(function() {
     $("#signup-page").show();
   });
 
-  $("#start").submit(function(e) {
+  $("#login").submit(function(e) {
     e.preventDefault();
-    $("#home-page").show();
-    $("#landing-page").hide();   
+    let user = {};
+    user.username = $("#emailLogin").val().trim();
+    user.password = $("#passwordLogin").val().trim();
+    loginUser(user);
   });
 
   $("#signup").submit(function(e) {
@@ -35,11 +44,8 @@ $(document).ready(function() {
     sailboat.description = $("#description").val().trim();
     sailboat.condition = $("#condition").val().trim();
     sailboat.year = $("#year").val().trim();
-    sailboat.name = $("#name").val().trim();
-    sailboat.name = $("#name").val().trim();
-    sailboat.name = $("#name").val().trim();
     createSailboat(sailboat);
-  });
+  }); 
 });
 
 //original function
@@ -55,6 +61,7 @@ function registerUser(user) {
     }, 
     error: function(err) {
       console.log(err);
+      // make onscreen error message 
     }
 
   };
@@ -75,6 +82,10 @@ function loginUser(user) {
       $("#signup-page").hide();
       $("#home-page").show();
     }
+    error: function(err) {
+      console.log(err);
+      // make onscreen error message 
+    }
   };
   $.ajax(settings);
 }
@@ -90,7 +101,29 @@ function createSailboat(sailboat) {
       Authorization: `Bearer ${token}`
     },
     success: function (data) {}, 
-    error: function (err) {}
+    error: function(err) {
+      console.log(err);
+      // make onscreen error message 
+    }
+  };
+  $.ajax(settings);
+}
+
+function editSailboat(sailboat) {
+  var token = localStorage.getItem("authToken");
+  var settings = {
+    url: "/sailboat",
+    contentType: 'application/json',
+    type: 'POST',
+    data: JSON.stringify(sailboat),
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    success: function (data) {}, 
+    error: function(err) {
+      console.log(err);
+      // make onscreen error message 
+    }  
   };
   $.ajax(settings);
 }

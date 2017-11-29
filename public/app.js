@@ -62,6 +62,14 @@ $(document).ready(function() {
     sailboat.year = $("#year").val().trim();
     createSailboat(sailboat);
   }); 
+
+  $("#search").submit(function(e) {
+    e.preventDefault();
+    var search = $("#search").val().trim();
+    findSailboats(search);
+  }); 
+
+
 });
 
 //original function
@@ -128,6 +136,25 @@ function editSailboat(sailboat) {
   var token = localStorage.getItem("authToken");
   var settings = {
     url: "/sailboat",
+    contentType: 'application/json',
+    type: 'POST',
+    data: JSON.stringify(sailboat),
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    success: function (data) {}, 
+    error: function(err) {
+      console.log(err);
+      // make onscreen error message 
+    }  
+  };
+  $.ajax(settings);
+}
+
+function findSailboats(sailboat) {
+  var token = localStorage.getItem("authToken");
+  var settings = {
+    url: "/sailboat/" + searchterm,
     contentType: 'application/json',
     type: 'POST',
     data: JSON.stringify(sailboat),

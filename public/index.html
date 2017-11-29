@@ -44,14 +44,21 @@
       </div> <!-- col signup page -->
     </div> <!-- row signup-page -->
 
-    <div class="topnav" id="topnav">
-      <a href="#home">Home</a>
-      <a href="#news">Search</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">Profile</a>
+    <div class="navbar" id="navbar">
+      <button class="btn-nav" id="nav-home" type="button">Home</button>
+      <button class="btn-nav" id="nav-search" type="button">Search</button>
+      <button class="btn-nav" id="nav-edit" type="button">Your Sailboats</button>
+      <button class="btn-nav" id="nav-profile" type="button">Profile</button>
     </div>
 
-    <div class="row" id="register-sailboat-page">
+    <div class="row" id="home-page">
+      <div class="col-6">
+        <div>Welcome Home</div>
+      </div> <!-- col home page -->
+    </div> <!-- home page -->
+
+    <div class="row" id="register-page">
+      <div class="col-3"></div>
       <div class="col-6">
         <h2 class="text-center">Register your Sailboat</h2> 
         <form id="register-sailboat">
@@ -83,8 +90,18 @@
           </div>
           <button class="btn btn-primary btn-block" type="submit">Register Sailboat</button>
         </form>
-      </div> <!-- col register sailboat page -->
-    </div> <!-- row register sailboat page -->
+      </div> <!-- col register page -->
+    </div> <!-- row register page -->
 
+    <div class="row" id="search-page">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <form id="signup">
+          <label for="search">Type</label>
+          <input type="text" class="form-control" name="search" id="search" placeholder="Hobie" required>
+          <button class="btnSearch" type="submit">Find the sailboats!</button>
+        </form>
+      </div> <!-- col search page -->
+    </div> <!-- row search page -->
   </body>
 </html>  

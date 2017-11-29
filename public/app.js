@@ -8,15 +8,31 @@ var state = {
 
 $(document).ready(function() {
 
-  $("#signup-page").hide();
-  $("#home-page").hide();
-  $("#register-sailboat-page").hide();
-  $("#topnav").hide();
+  showCurrentPage("landing-page");
 
   $("#btn-signup").click(function(e) {
     e.preventDefault();
-    $("#landing-page").hide();
-    $("#signup-page").show();
+    showCurrentPage("home-page", "navbar");
+  });
+
+  $("#nav-home").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("home-page", "navbar");
+  });
+
+  $("#nav-search").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("search-page", "navbar");
+  });
+
+  $("#nav-edit").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("edit-page", "navbar");
+  });  
+
+  $("#nav-profile").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("profile-page", "navbar");
   });
 
   $("#login").submit(function(e) {
@@ -63,7 +79,6 @@ function registerUser(user) {
       console.log(err);
       // make onscreen error message 
     }
-
   };
   $.ajax(settings);
 }
@@ -79,9 +94,9 @@ function loginUser(user) {
     },
     success: function(test) {
       localStorage.setItem("authToken", test.authToken);
-      $("#signup-page").hide();
-      $("#home-page").show();
-    }
+      $("#navbar").show();
+      showCurrentPage("home-page", "navbar");
+    },
     error: function(err) {
       console.log(err);
       // make onscreen error message 
@@ -126,4 +141,17 @@ function editSailboat(sailboat) {
     }  
   };
   $.ajax(settings);
+}
+
+
+function showCurrentPage() {
+  $("#signup-page").hide();
+  $("#home-page").hide();
+  $("#register-page").hide();
+  $("#navbar").hide();
+  $("#landing-page").hide();
+  $("#search-page").hide();
+  for (i=0; i<arguments.length; i++) {
+    $(`#${arguments[i]}`).show();
+  }
 }

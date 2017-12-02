@@ -188,7 +188,6 @@ function showCurrentPage() {
 }
 
 function handleError(err) {
-      console.log(err);
-              // make onscreen error message 
-
+  console.log(err);
+  // make onscreen error message 
 }

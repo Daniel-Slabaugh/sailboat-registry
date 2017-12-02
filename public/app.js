@@ -3,7 +3,9 @@ var state = {
   register:true,
   longitude:0,
   latitude:0,
-  sailboats:[]
+  owner:"",
+  sailboats:[],
+  ownedSailboats:[]
 };
 
 $(document).ready(function() {
@@ -69,7 +71,6 @@ $(document).ready(function() {
     findSailboats(search);
   }); 
 
-
 });
 
 //original function
@@ -84,8 +85,7 @@ function registerUser(user) {
       loginUser(user);
     }, 
     error: function(err) {
-      console.log(err);
-      // make onscreen error message 
+      handleError(err);
     }
   };
   $.ajax(settings);
@@ -102,12 +102,11 @@ function loginUser(user) {
     },
     success: function(test) {
       localStorage.setItem("authToken", test.authToken);
-      $("#navbar").show();
-      showCurrentPage("home-page", "navbar");
+      state.owner = user.username;
+      getSailboats();
     },
     error: function(err) {
-      console.log(err);
-      // make onscreen error message 
+      handleError(err);
     }
   };
   $.ajax(settings);
@@ -116,7 +115,7 @@ function loginUser(user) {
 function createSailboat(sailboat) {
   var token = localStorage.getItem("authToken");
   var settings = {
-    url: "/sailboat",
+    url: "/sailboats",
     contentType: 'application/json',
     type: 'POST',
     data: JSON.stringify(sailboat),
@@ -125,8 +124,7 @@ function createSailboat(sailboat) {
     },
     success: function (data) {}, 
     error: function(err) {
-      console.log(err);
-      // make onscreen error message 
+      handleError(err);
     }
   };
   $.ajax(settings);
@@ -135,7 +133,7 @@ function createSailboat(sailboat) {
 function editSailboat(sailboat) {
   var token = localStorage.getItem("authToken");
   var settings = {
-    url: "/sailboat",
+    url: "/sailboats",
     contentType: 'application/json',
     type: 'POST',
     data: JSON.stringify(sailboat),
@@ -144,27 +142,33 @@ function editSailboat(sailboat) {
     },
     success: function (data) {}, 
     error: function(err) {
-      console.log(err);
-      // make onscreen error message 
+      handleError(err);
     }  
   };
   $.ajax(settings);
 }
 
-function findSailboats(sailboat) {
+function getSailboats() {
   var token = localStorage.getItem("authToken");
   var settings = {
-    url: "/sailboat/" + searchterm,
+    url: "/sailboats",
     contentType: 'application/json',
-    type: 'POST',
-    data: JSON.stringify(sailboat),
+    type: 'GET',
+    // data: JSON.stringify(sailboat),
     headers: {
       Authorization: `Bearer ${token}`
     },
-    success: function (data) {}, 
+    success: function (data) {
+      state.sailboats = data;
+      for(i=0; i<state.sailboats.length; i++) {
+        if (state.sailboats[i].owner == state.owner) {
+          state.ownedSailboats.push(state.sailboats[i]);
+        }
+      }
+      showCurrentPage("home-page", "navbar");
+    }, 
     error: function(err) {
-      console.log(err);
-      // make onscreen error message 
+      handleError(err);
     }  
   };
   $.ajax(settings);
@@ -181,4 +185,10 @@ function showCurrentPage() {
   for (i=0; i<arguments.length; i++) {
     $(`#${arguments[i]}`).show();
   }
+}
+
+function handleError(err) {
+      console.log(err);
+              // make onscreen error message 
+
 }

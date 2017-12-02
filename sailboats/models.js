@@ -7,7 +7,6 @@ const sailboatSchema = mongoose.Schema({
     city: String,
     state: String,
     zipcode: String,
-    country: String,
   },
   name: String,
   description: String, 
@@ -17,7 +16,7 @@ const sailboatSchema = mongoose.Schema({
 });
 
 sailboatSchema.virtual('addressString').get(function() {
-  return `${this.address.street}, ${this.address.city}, ${this.address.state}, ${this.address.zipcode}, ${this.address.country}`;
+  return `${this.address.street}, ${this.address.city}, ${this.address.state}, ${this.address.zipcode}`;
 });
 
 sailboatSchema.methods.simpleSailboat = function() {

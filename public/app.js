@@ -5,7 +5,8 @@ var state = {
   latitude:0,
   owner:"",
   sailboats:[],
-  ownedSailboats:[]
+  ownedSailboats:[],
+  searchedSailboats:[]
 };
 
 $(document).ready(function() {
@@ -73,7 +74,20 @@ $(document).ready(function() {
 
 });
 
-//original function
+function findSailboats(search) {
+  for(i=0; i<state.sailboats.length; i++) {
+    if (search == state.sailboats[i].owner || 
+        search == state.sailboats[i].name ||
+        search == state.sailboats[i].description ||
+        search == state.sailboats[i].condition ||
+        search == state.sailboats[i].year) 
+    {
+      state.searchedSailboats.push(state.sailboats[i]);
+    }
+  }  
+  displaySailboats(state.searchedSailboats, "search-results-table")
+}
+
 function registerUser(user) {
   console.log(JSON.stringify(user));
   var settings = {
@@ -174,7 +188,6 @@ function getSailboats() {
   $.ajax(settings);
 }
 
-
 function showCurrentPage() {
   $("#signup-page").hide();
   $("#home-page").hide();
@@ -185,6 +198,32 @@ function showCurrentPage() {
   for (i=0; i<arguments.length; i++) {
     $(`#${arguments[i]}`).show();
   }
+}
+
+function displaySailboats(sailboats, page) {
+  var resultElement = '';
+  if (sailboats.length > 0) {
+    resultElement +=  '<th>' + 
+                      '<td><p>Owner</p></td>' + 
+                      '<td><p>Name</p></td>' + 
+                      '<td><p>Description</p></td>' + 
+                      '<td><p>Condition</p></td>' + 
+                      '<td><p>Year</p></td>' + 
+                      '</th>';
+    sailboats.forEach(function(object) {
+      resultElement +=  '<tr>' + 
+                        '<td><p>' + object.owner + '</p></td>' + 
+                        '<td><p>' + object.name + '</p></td>' + 
+                        '<td><p>' + object.description + '</p></td>' + 
+                        '<td><p>' + object.condition + '</p></td>' + 
+                        '<td><p>' + object.year + '</p></td>' + 
+                        '</tr>';
+      });
+  } else {
+      resultElement += '<p>No sailboats here</p>';
+  }
+  $(`#${page}`).html(resultElement);
+  showCurrentPage(page, "navbar");
 }
 
 function handleError(err) {

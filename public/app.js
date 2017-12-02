@@ -85,7 +85,8 @@ function findSailboats(search) {
       state.searchedSailboats.push(state.sailboats[i]);
     }
   }  
-  displaySailboats(state.searchedSailboats, "search-results-table")
+  console.log("here1");
+  displaySailboats(state.searchedSailboats, "search-results-table");
 }
 
 function registerUser(user) {
@@ -222,6 +223,7 @@ function displaySailboats(sailboats, page) {
   } else {
       resultElement += '<p>No sailboats here</p>';
   }
+  console.log("here2");
   $(`#${page}`).html(resultElement);
   showCurrentPage(page, "navbar");
 }

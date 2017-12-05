@@ -189,31 +189,31 @@ function showCurrentPage() {
   }
 }
 
-function displaySailboats(sailboats, page) {
+function displaySailboats(sailboats, page, container) {
   var resultElement = '';
   if (sailboats.length > 0) {
     console.log("did this");
-    resultElement +=  '<th>' + 
-                      '<td><p>Owner</p></td>' +         
-                      '<td><p>Name</p></td>' + 
-                      '<td><p>Description</p></td>' + 
-                      '<td><p>Condition</p></td>' + 
-                      '<td><p>Year</p></td>' + 
-                      '</th>';
+    resultElement +=  ('<tr>' + 
+                      '<th><p>Owner</p></th>' +         
+                      '<th><p>Name</p></th>' + 
+                      '<th><p>Description</p></th>' + 
+                      '<th><p>Condition</p></th>' + 
+                      '<th><p>Year</p></th>' + 
+                      '</tr>');
     sailboats.forEach(function(object) {
-      resultElement +=  '<tr>' + 
+      resultElement +=  ('<tr>' + 
                         '<td><p>' + object.owner + '</p></td>' + 
                         '<td><p>' + object.name + '</p></td>' + 
                         '<td><p>' + object.description + '</p></td>' + 
                         '<td><p>' + object.condition + '</p></td>' + 
                         '<td><p>' + object.year + '</p></td>' + 
-                        '</tr>';
+                        '</tr>');
       });
   } else {
       resultElement += '<p>No sailboats here</p>';
   }
   console.log(resultElement);
-  $(`#${page}`).html(resultElement);
+  $(`#${container}`).html(resultElement);
   showCurrentPage(page, "navbar");
 }
 
@@ -253,10 +253,10 @@ function findSailboats(toSearch) {
   for(var i=0; i<state.sailboats.length; i++) {
     for(var key in state.sailboats[i]) {
       if(state.sailboats[i][key].indexOf(toSearch)!=-1) {
-        if(!itemExists(state.searchedSailboats, state.sailboats[i])) results.push(state.sailboats[i]);
+        if(!itemExists(state.searchedSailboats, state.sailboats[i])) state.searchedSailboats.push(state.sailboats[i]);
       }
     }
   }
   console.log(JSON.stringify(state.searchedSailboats));
-  displaySailboats(state.searchedSailboats, "search-results-table");
+  displaySailboats(state.searchedSailboats, "search-page", "search-results-table");
 }

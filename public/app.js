@@ -66,28 +66,13 @@ $(document).ready(function() {
     createSailboat(sailboat);
   }); 
 
-  $("#search").submit(function(e) {
+  $("#search-form").submit(function(e) {
     e.preventDefault();
     var search = $("#search").val().trim();
     findSailboats(search);
   }); 
 
 });
-
-function findSailboats(search) {
-  for(i=0; i<state.sailboats.length; i++) {
-    if (search == state.sailboats[i].owner || 
-        search == state.sailboats[i].name ||
-        search == state.sailboats[i].description ||
-        search == state.sailboats[i].condition ||
-        search == state.sailboats[i].year) 
-    {
-      state.searchedSailboats.push(state.sailboats[i]);
-    }
-  }  
-  console.log("here1");
-  displaySailboats(state.searchedSailboats, "search-results-table");
-}
 
 function registerUser(user) {
   console.log(JSON.stringify(user));
@@ -175,9 +160,12 @@ function getSailboats() {
     },
     success: function (data) {
       state.sailboats = data;
+      console.log(JSON.stringify(state.sailboats));
       for(i=0; i<state.sailboats.length; i++) {
         if (state.sailboats[i].owner == state.owner) {
           state.ownedSailboats.push(state.sailboats[i]);
+          console.log(JSON.stringify(state.ownedSailboats));
+
         }
       }
       showCurrentPage("home-page", "navbar");
@@ -204,8 +192,9 @@ function showCurrentPage() {
 function displaySailboats(sailboats, page) {
   var resultElement = '';
   if (sailboats.length > 0) {
+    console.log("did this");
     resultElement +=  '<th>' + 
-                      '<td><p>Owner</p></td>' + 
+                      '<td><p>Owner</p></td>' +         
                       '<td><p>Name</p></td>' + 
                       '<td><p>Description</p></td>' + 
                       '<td><p>Condition</p></td>' + 
@@ -223,7 +212,7 @@ function displaySailboats(sailboats, page) {
   } else {
       resultElement += '<p>No sailboats here</p>';
   }
-  console.log("here2");
+  console.log(resultElement);
   $(`#${page}`).html(resultElement);
   showCurrentPage(page, "navbar");
 }
@@ -231,4 +220,43 @@ function displaySailboats(sailboats, page) {
 function handleError(err) {
   console.log(err);
   // make onscreen error message 
+}
+
+
+
+
+
+
+//search function 
+function trimString(s) {
+  var l=0, r=s.length -1;
+  while(l < s.length && s[l] == ' ') l++;
+  while(r > l && s[r] == ' ') r-=1;
+  return s.substring(l, r+1);
+}
+
+function compareObjects(o1, o2) {
+  var k = '';
+  for(k in o1) if(o1[k] != o2[k]) return false;
+  for(k in o2) if(o1[k] != o2[k]) return false;
+  return true;
+}
+
+function itemExists(haystack, needle) {
+  for(var i=0; i<haystack.length; i++) if(compareObjects(haystack[i], needle)) return true;
+  return false;
+}
+
+function findSailboats(toSearch) {
+  state.searchedSailboats = [];
+  toSearch = trimString(toSearch); // trim it
+  for(var i=0; i<state.sailboats.length; i++) {
+    for(var key in state.sailboats[i]) {
+      if(state.sailboats[i][key].indexOf(toSearch)!=-1) {
+        if(!itemExists(state.searchedSailboats, state.sailboats[i])) results.push(state.sailboats[i]);
+      }
+    }
+  }
+  console.log(JSON.stringify(state.searchedSailboats));
+  displaySailboats(state.searchedSailboats, "search-results-table");
 }

@@ -241,7 +241,19 @@ function displaySailboats(sailboats, page, container) {
 
 function handleError(err) {
   console.log(err);
-  // make onscreen error message 
+  var resultElement = '';
+  resultElement +=  ('<div id="myModal" class="modal">' +
+                      '<div class="modal-content">' + 
+                        '<span class="close">&times;</span>' +
+                        '<p>Error! Your call failed with error:</p>' +
+                        '<p>' + err.status + ' ' + err.responseText + '</p>' +
+                      '</div>' +
+                    '</div>')
+  $("#modal").html(resultElement);
+  $("#modal").click(function(e) {
+    e.preventDefault();
+    $("#modal").html('');
+  });
 }
 
 //search function 

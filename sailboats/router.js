@@ -38,7 +38,7 @@ router.post('/',
   Sailboat
     .create({
       owner: req.body.owner,
-      address: req.body.address,
+      state: req.body.state,
       name: req.body.name,
       description: req.body.description,
       year: req.body.year,
@@ -65,7 +65,7 @@ router.put('/:id',
   }
 
   const toUpdate = {};
-  const updateableFields = ['address', 'name', 'description', 'year', 'condition', 'picture'];
+  const updateableFields = ['state', 'name', 'description', 'year', 'condition', 'picture'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {

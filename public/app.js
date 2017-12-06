@@ -197,23 +197,22 @@ function showCurrentPage() {
 function displaySailboats(sailboats, page, container) {
   var resultElement = '';
   if (sailboats.length > 0) {
-    console.log("did this");
-    resultElement +=  ('<tr>' + 
-                      '<th><p>Owner</p></th>' +         
-                      '<th><p>Name</p></th>' + 
-                      '<th><p>Description</p></th>' + 
-                      '<th><p>Condition</p></th>' + 
-                      '<th><p>Year</p></th>' + 
-                      '<th><p>Picture</p></th>' + 
-                      '</tr>');
+    // resultElement +=  ('<tr>' + 
+    //                   '<th><p>Owner</p></th>' +         
+    //                   '<th><p>Name</p></th>' + 
+    //                   '<th><p>Description</p></th>' + 
+    //                   '<th><p>Condition</p></th>' + 
+    //                   '<th><p>Year</p></th>' + 
+    //                   '<th><p>Picture</p></th>' + 
+    //                   '</tr>');
     sailboats.forEach(function(object) {
       resultElement +=  ('<tr>' + 
-                        '<td><p>' + object.owner + '</p></td>' + 
-                        '<td><p>' + object.name + '</p></td>' + 
-                        '<td><p>' + object.description + '</p></td>' + 
-                        '<td><p>' + object.condition + '</p></td>' + 
-                        '<td><p>' + object.year + '</p></td>' + 
                         '<td><p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:304px;height:228px;"></p></td>' + 
+                        '<td><p>Owner: ' + object.owner + '</p><br>' + 
+                        '<p>Name' + object.name + '</p><br>' + 
+                        '<p>Description' + object.description + '</p><br>' + 
+                        '<p>Condition' + object.condition + '</p><br>' + 
+                        '<p>Year' + object.year + '</p><br></td>' + 
                         '</tr>');
       });
   } else {

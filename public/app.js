@@ -1,4 +1,3 @@
-
 var state = {
   register:true,
   longitude:0,
@@ -74,6 +73,16 @@ $(document).ready(function() {
   }); 
 
   $("#btnCreate").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("register-page", "navbar");
+  });
+
+  $(".btnEdit").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("register-page", "navbar");
+  });
+
+  $(".btnDelete").click(function(e) {
     e.preventDefault();
     showCurrentPage("register-page", "navbar");
   });
@@ -169,7 +178,6 @@ function getSailboats() {
       for(i=0; i<state.sailboats.length; i++) {
         if (state.sailboats[i].owner == state.owner) {
           state.ownedSailboats.push(state.sailboats[i]);
-          console.log(JSON.stringify(state.ownedSailboats));
         }
       }
       showCurrentPage("home-page", "navbar");
@@ -199,12 +207,21 @@ function displaySailboats(sailboats, page, container) {
   if (sailboats.length > 0) {
     sailboats.forEach(function(object) {
       resultElement +=  ('<tr>' + 
-                        '<td><p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;"></p></td>' + 
+                        '<td>' + 
+                          '<p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;"></p>' +
+                        '</td>' + 
                         '<td><h3>Owner:</h3><p>' + object.owner + '</p><br>' + 
-                        '<h3>Name:</h3><p>' + object.name + '</p><br>' + 
-                        '<h3>Description:</h3><p>' + object.description + '</p><br>' + 
-                        '<h3>Condition:</h3><p>' + object.condition + '</p><br>' + 
-                        '<h3>Year:</h3><p>' + object.year + '</p><br></td>' + 
+                          '<h3>Name:</h3><p>' + object.name + '</p><br>' + 
+                          '<h3>Description:</h3><p>' + object.description + '</p><br>' + 
+                          '<h3>Condition:</h3><p>' + object.condition + '</p><br>' + 
+                          '<h3>Year:</h3><p>' + object.year + '</p><br>' + 
+                        '</td>' + 
+                        '<td>' +     
+                          '<button class="btn btnEdit" id="edit' + object.indexOf + 
+                              '" name="' + object.id + '" type="button">Edit</button>' +
+                          '<button class="btn btnDelete" id="delete' + object.indexOf + 
+                              '" name="' + object.id + '"type="button">Delete</button>' +
+                        '</td>' + 
                         '</tr>');
       });
   } else {

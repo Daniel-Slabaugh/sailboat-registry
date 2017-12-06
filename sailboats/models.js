@@ -12,7 +12,8 @@ const sailboatSchema = mongoose.Schema({
   description: String, 
   year: Date, 
   condition: String,
-  forSale: Boolean
+  forSale: Boolean,
+  picture: String
 });
 
 sailboatSchema.virtual('addressString').get(function() {
@@ -28,7 +29,8 @@ sailboatSchema.methods.simpleSailboat = function() {
     description: this.description, 
     year: this.year, 
     condition: this.condition,
-    forSale: this.forSale
+    forSale: this.forSale,
+    picture: this.picture
   };
 }
 

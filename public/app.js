@@ -63,6 +63,7 @@ $(document).ready(function() {
     sailboat.description = $("#description").val().trim();
     sailboat.condition = $("#condition").val().trim();
     sailboat.year = $("#year").val().trim();
+    sailboat.picture = $("#picture").val().trim();
     createSailboat(sailboat);
   }); 
 
@@ -199,6 +200,7 @@ function displaySailboats(sailboats, page, container) {
                       '<th><p>Description</p></th>' + 
                       '<th><p>Condition</p></th>' + 
                       '<th><p>Year</p></th>' + 
+                      '<th><p>Picture</p></th>' + 
                       '</tr>');
     sailboats.forEach(function(object) {
       resultElement +=  ('<tr>' + 
@@ -206,7 +208,7 @@ function displaySailboats(sailboats, page, container) {
                         '<td><p>' + object.name + '</p></td>' + 
                         '<td><p>' + object.description + '</p></td>' + 
                         '<td><p>' + object.condition + '</p></td>' + 
-                        '<td><p>' + object.year + '</p></td>' + 
+                        '<td><p><img src="' + object.picture + '" alt="Invalid Image URL" style="width:304px;height:228px;"></p></td>' + 
                         '</tr>');
       });
   } else {
@@ -221,11 +223,6 @@ function handleError(err) {
   console.log(err);
   // make onscreen error message 
 }
-
-
-
-
-
 
 //search function 
 function trimString(s) {

@@ -43,6 +43,7 @@ router.post('/',
       description: req.body.description,
       year: req.body.year,
       condition: req.body.condition,
+      picture: req.body.picture
     })
     .then(Sailboat => res.status(201).json(Sailboat.simpleSailboat()))
     .catch(err => {
@@ -64,7 +65,7 @@ router.put('/:id',
   }
 
   const toUpdate = {};
-  const updateableFields = ['address', 'name', 'description', 'year', 'condition'];
+  const updateableFields = ['address', 'name', 'description', 'year', 'condition', 'picture'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {

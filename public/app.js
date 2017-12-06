@@ -197,26 +197,18 @@ function showCurrentPage() {
 function displaySailboats(sailboats, page, container) {
   var resultElement = '';
   if (sailboats.length > 0) {
-    // resultElement +=  ('<tr>' + 
-    //                   '<th><p>Owner</p></th>' +         
-    //                   '<th><p>Name</p></th>' + 
-    //                   '<th><p>Description</p></th>' + 
-    //                   '<th><p>Condition</p></th>' + 
-    //                   '<th><p>Year</p></th>' + 
-    //                   '<th><p>Picture</p></th>' + 
-    //                   '</tr>');
     sailboats.forEach(function(object) {
       resultElement +=  ('<tr>' + 
-                        '<td><p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:304px;height:228px;"></p></td>' + 
-                        '<td><p>Owner: ' + object.owner + '</p><br>' + 
-                        '<p>Name' + object.name + '</p><br>' + 
-                        '<p>Description' + object.description + '</p><br>' + 
-                        '<p>Condition' + object.condition + '</p><br>' + 
-                        '<p>Year' + object.year + '</p><br></td>' + 
+                        '<td><p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;"></p></td>' + 
+                        '<td><h3>Owner:</h3><p>' + object.owner + '</p><br>' + 
+                        '<h3>Name:</h3><p>' + object.name + '</p><br>' + 
+                        '<h3>Description:</h3><p>' + object.description + '</p><br>' + 
+                        '<h3>Condition:</h3><p>' + object.condition + '</p><br>' + 
+                        '<h3>Year:</h3><p>' + object.year + '</p><br></td>' + 
                         '</tr>');
       });
   } else {
-      resultElement += '<p>No sailboats here</p>';
+      resultElement += '<h2>No sailboats here</h2>';
   }
   console.log(resultElement);
   $(`#${container}`).html(resultElement);

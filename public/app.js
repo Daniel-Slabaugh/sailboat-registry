@@ -76,16 +76,6 @@ $(document).ready(function() {
     e.preventDefault();
     showCurrentPage("register-page", "navbar");
   });
-
-  $(".btnEdit").click(function(e) {
-    e.preventDefault();
-    showCurrentPage("register-page", "navbar");
-  });
-
-  $(".btnDelete").click(function(e) {
-    e.preventDefault();
-    showCurrentPage("register-page", "navbar");
-  });
 });
 
 function registerUser(user) {
@@ -205,7 +195,7 @@ function showCurrentPage() {
 function displaySailboats(sailboats, page, container) {
   var resultElement = '';
   if (sailboats.length > 0) {
-    sailboats.forEach(function(object) {
+    sailboats.forEach(function(object, index) {
       resultElement +=  ('<tr>' + 
                         '<td>' + 
                           '<p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;"></p>' +
@@ -217,13 +207,30 @@ function displaySailboats(sailboats, page, container) {
                           '<h3>Year:</h3><p>' + object.year + '</p><br>' + 
                         '</td>' + 
                         '<td>' +     
-                          '<button class="btn btnEdit" id="edit' + object.indexOf + 
+                          '<button class="btn btnEdit" id="btnEditSailboat' + index + 
                               '" name="' + object.id + '" type="button">Edit</button>' +
-                          '<button class="btn btnDelete" id="delete' + object.indexOf + 
+                          '<button class="btn btnDelete" id="btnDeleteSailboat' + index + 
                               '" name="' + object.id + '"type="button">Delete</button>' +
                         '</td>' + 
                         '</tr>');
+        console.log(index);
+
+        $(`#btnEditSailboat${index}`).click(function(e) {
+          e.preventDefault();
+          // showCurrentPage("register-page", "navbar");
+          console.log("editing!!!!");
+
+          console.log(e.target.name);
+          console.log(e.target.id);
+
+        });
+
+        // $(".btnDelete").click(function(e) {
+        //   e.preventDefault();
+        //   // showCurrentPage("register-page", "navbar");
+        // });
       });
+      $()
   } else {
       resultElement += '<h2>No sailboats here</h2>';
   }

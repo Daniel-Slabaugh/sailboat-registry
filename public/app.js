@@ -13,9 +13,9 @@ $(document).ready(function() {
 
   showCurrentPage("landing-page");
 
-  $("#btn-signup").click(function(e) {
+  $("#btnSignup").click(function(e) {
     e.preventDefault();
-    showCurrentPage("home-page", "navbar");
+    showCurrentPage("signup-page");
   });
 
   $("#nav-home").click(function(e) {
@@ -35,7 +35,7 @@ $(document).ready(function() {
 
   $("#nav-profile").click(function(e) {
     e.preventDefault();
-    showCurrentPage("profile-page", "navbar");
+    displaySailboats(state.ownedSailboats, "profile-page", "owned-sailboats-table");
   });
 
   $("#login").submit(function(e) {
@@ -59,7 +59,7 @@ $(document).ready(function() {
     e.preventDefault();
     let sailboat = {};
     sailboat.name = $("#name").val().trim();
-    sailboat.owner = $("#owner").val().trim();
+    sailboat.owner = state.owner;
     sailboat.description = $("#description").val().trim();
     sailboat.condition = $("#condition").val().trim();
     sailboat.year = $("#year").val().trim();
@@ -73,6 +73,10 @@ $(document).ready(function() {
     findSailboats(search);
   }); 
 
+  $("#btnCreate").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("register-page", "navbar");
+  });
 });
 
 function registerUser(user) {
@@ -166,7 +170,6 @@ function getSailboats() {
         if (state.sailboats[i].owner == state.owner) {
           state.ownedSailboats.push(state.sailboats[i]);
           console.log(JSON.stringify(state.ownedSailboats));
-
         }
       }
       showCurrentPage("home-page", "navbar");
@@ -185,6 +188,7 @@ function showCurrentPage() {
   $("#navbar").hide();
   $("#landing-page").hide();
   $("#search-page").hide();
+  $("#profile-page").hide();
   for (i=0; i<arguments.length; i++) {
     $(`#${arguments[i]}`).show();
   }
@@ -208,7 +212,8 @@ function displaySailboats(sailboats, page, container) {
                         '<td><p>' + object.name + '</p></td>' + 
                         '<td><p>' + object.description + '</p></td>' + 
                         '<td><p>' + object.condition + '</p></td>' + 
-                        '<td><p><img src="' + object.picture + '" alt="Invalid Image URL" style="width:304px;height:228px;"></p></td>' + 
+                        '<td><p>' + object.year + '</p></td>' + 
+                        '<td><p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:304px;height:228px;"></p></td>' + 
                         '</tr>');
       });
   } else {

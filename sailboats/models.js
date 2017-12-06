@@ -10,7 +10,7 @@ const sailboatSchema = mongoose.Schema({
   },
   name: String,
   description: String, 
-  year: Date, 
+  year: String, 
   condition: String,
   forSale: Boolean,
   picture: String

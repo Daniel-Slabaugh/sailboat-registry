@@ -15,6 +15,13 @@
   </head>
   <body class="container">
 
+    <div class="navbar" id="navbar">
+      <button class="btn-nav" id="nav-home" type="button">Home</button>
+      <button class="btn-nav" id="nav-search" type="button">Search</button>
+      <button class="btn-nav" id="nav-edit" type="button">Your Sailboats</button>
+      <button class="btn-nav" id="nav-profile" type="button">Profile</button>
+    </div>
+
     <div class="row" id="landing-page">
       <div class="col-4"></div>
       <div class="col-4">
@@ -25,7 +32,7 @@
           <label for="passwordLogin">Password</label>
           <input type="text" class="form-control" name="passwordLogin" id="passwordLogin" placeholder="Password" required>
           <button class="btn btn-primary btn-block" type="submit">Login</button>
-          <button class="btn btn-primary btn-block" id="btn-signup" type="button">Sign Up</button>
+          <button class="btn btn-primary btn-block" id="btnSignup" type="button">Sign Up</button>
         </form>
       </div> <!-- col landing page -->
     </div> <!-- row landing-page -->
@@ -41,17 +48,10 @@
           <input type="text" class="form-control" name="email" id="email" placeholder="ilovesailboats@water.com" required>
           <label for="password">Password</label>
           <input type="text" class="form-control" name="password" id="password" placeholder="Password" required>
-          <button class="btnCreateAccount" type="submit">Create Account</button>
+          <button class="btn btnCreateAccount" type="submit">Create Account</button>
         </form>
       </div> <!-- col signup page -->
     </div> <!-- row signup-page -->
-
-    <div class="navbar" id="navbar">
-      <button class="btn-nav" id="nav-home" type="button">Home</button>
-      <button class="btn-nav" id="nav-search" type="button">Search</button>
-      <button class="btn-nav" id="nav-edit" type="button">Your Sailboats</button>
-      <button class="btn-nav" id="nav-profile" type="button">Profile</button>
-    </div>
 
     <div class="row" id="home-page">
       <div class="col-3"></div>
@@ -68,18 +68,14 @@
           <div class="group">
             <label for="name">Sailboat Name</label>
             <input type="text" class="form-control" name="name" id="name" placeholder="Carumba" required>
-          </div>  
-          <div class="group">
-            <label for="owner">Sailboat Name</label>
-            <input type="text" class="form-control" name="owner" id="owner" placeholder="Mike" required>
-          </div>        
+          </div>    
           <div class="group">
             <label for="description">Describe your boat</label>
             <input type="text" class="form-control" name="description" id="description" placeholder="Hobie Cat 16" required>
           </div>
           <div class="group">
             <label for="condiditon">Condition</label>
-            <input type="text" class="form-control" name="condition" id="condition" placeholder="Good/Fair" required>
+            <input type="text" class="form-control" name="condition" id="condition" placeholder="Excellent/Good/Fair/Other" required>
           </div>  
           <div class="group">
             <label for="year">Year</label>
@@ -89,11 +85,7 @@
           <div class="group">
             <label for="picture">Link to Picture of Sailboat</label>
             <input type="text" class="form-control" name="picture" id="picture" placeholder="https://imgur.com/sailboat" required>
-          </div>  
-          <div class="group">
-            <label for="image">Link to Image</label>
-            <input type="text" class="form-control" name="image" id="image" placeholder="http://coolimage.jpg" required>
-          </div>  
+          </div> 
           <button class="btn btn-primary btn-block" type="submit">Register Sailboat</button>
         </form>
       </div> <!-- col register page -->
@@ -105,7 +97,7 @@
         <form id="search-form">
           <label for="search">Search by Name, Type, or Description</label>
           <input type="text" class="form-control" name="search" id="search" placeholder="Hobie" required>
-          <button class="btnSearch" type="submit">Find the sailboats!</button>
+          <button class="btn btnSearch" type="submit">Find the sailboats!</button>
         </form>
 
         <table class="table table-striped table-bordered" >
@@ -118,14 +110,9 @@
     <div class="row" id="profile-page">
       <div class="col-3"></div>
       <div class="col-6">
-        <form id="search-form">
-          <label for="search">Search by Name, Type, or Description</label>
-          <input type="text" class="form-control" name="search" id="search" placeholder="Hobie" required>
-          <button class="btnSearch" type="submit">Find the sailboats!</button>
-        </form>
-
+        <button class="btn btnCreate" id="btnCreate">Register a new Sailboat</button>
         <table class="table table-striped table-bordered" >
-          <tbody id="search-results-table">
+          <tbody id="owned-sailboats-table">
           </tbody>
         </table>
       </div> <!-- col profile page -->

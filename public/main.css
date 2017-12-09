@@ -1,3 +1,7 @@
+.hidden {
+    display: none;
+}
+
 /* Add a black background color to the top navigation */
 .navbar {
     background-color: #333;

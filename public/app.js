@@ -74,10 +74,20 @@ $(document).ready(function() {
   });
 
   $(document).on("click", ".btnDelete", function() {
-    console.log("delete clicked");
     var id = $(this).attr("name");
     deleteSailboat(id);
-  })
+  });
+
+  $(document).on("click", ".btnEdit", function() {
+    var id = $(this).attr("name");
+    editSailboat(id);
+  });
+
+  $("#btnUpdateSailbot").click(function(e) {
+    e.preventDefault();
+    showCurrentPage("register-page", "navbar");
+  });
+
 });
 
 function registerUser(user) {

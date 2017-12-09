@@ -114,7 +114,7 @@ function loginUser(user) {
     success: function(test) {
       localStorage.setItem("authToken", test.authToken);
       state.owner = user.username;
-      getSailboats();
+      getSailboats("");
     },
     error: function(err) {
       handleError(err);
@@ -134,7 +134,7 @@ function createSailboat(sailboat) {
       Authorization: `Bearer ${token}`
     },
     success: function (data) {
-      getSailboats();
+      getSailboats("Sailboat registered!");
     }, 
     error: function(err) {
       handleError(err);
@@ -171,7 +171,9 @@ function deleteSailboat(id) {
     headers: {
       Authorization: `Bearer ${token}`
     },
-    success: function (data) {}, 
+    success: function (data) {
+      getSailboats("Sailboat Deleted")
+    }, 
     error: function(err) {
       handleError(err);
     }  

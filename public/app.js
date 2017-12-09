@@ -79,7 +79,6 @@ $(document).ready(function() {
     sailboat.state = $("#stateE").val().trim();
     sailboat.picture = $("#pictureE").val().trim();
     sailboat.id = $("#edit-sailboat").attr("name");
-    console.log(sailboat.id);
     editSailboat(sailboat);
   }); 
 
@@ -115,7 +114,6 @@ $(document).ready(function() {
 });
 
 function registerUser(user) {
-  console.log(JSON.stringify(user));
   var settings = {
     url: "/users",
     data: JSON.stringify(user),
@@ -193,7 +191,6 @@ function editSailboat(sailboat) {
 }
 
 function deleteSailboat(id) {
-  console.log("delete called")
   var token = localStorage.getItem("authToken");
   var settings = {
     url: `/sailboats/${id}`,
@@ -225,7 +222,6 @@ function getSailboats(message) {
     success: function (data) {
       state.sailboats = [];
       state.sailboats = data;
-      console.log(JSON.stringify(state.sailboats));
       state.ownedSailboats = [];
       for(i=0; i<state.sailboats.length; i++) {
         if (state.sailboats[i].owner == state.owner) {
@@ -280,7 +276,6 @@ function displaySailboats(sailboats, page, container) {
                               '" name="' + object.id + '"type="button">Delete</button>' +
                         '</div>' + 
                         '</div>');
-        console.log(index);
       });
   } else {
       resultElement += '<h2>No sailboats here</h2>';
@@ -356,7 +351,6 @@ function changeSailboat(id) {
       sailboat = state.sailboats[i];
     }
   }
-  console.log(sailboat);
   $("#nameE:text").val(sailboat.name);
   $("#descriptionE").val(sailboat.description);
   $("#conditionE").val(sailboat.condition);

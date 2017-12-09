@@ -38,7 +38,12 @@ $(document).ready(function() {
     let user = {};
     user.username = $("#emailLogin").val().trim();
     user.password = $("#passwordLogin").val().trim();
-    loginUser(user);
+    var confirmPass = $("#confirmPass").val().trim();
+    if(user.password == confirmPass) {
+      loginUser(user);
+    } else {
+        window.confirm('Your passwords must match');
+    }
   });
 
   $("#signup").submit(function(e) {

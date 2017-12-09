@@ -24,6 +24,7 @@ $(document).ready(function() {
 
   $("#nav-search").click(function(e) {
     e.preventDefault();
+    clearSearch();
     showCurrentPage("search-page", "navbar");
   });
 
@@ -132,7 +133,9 @@ function createSailboat(sailboat) {
     headers: {
       Authorization: `Bearer ${token}`
     },
-    success: function (data) {}, 
+    success: function (data) {
+      getSailboats();
+    }, 
     error: function(err) {
       handleError(err);
     }
@@ -176,7 +179,7 @@ function deleteSailboat(id) {
   $.ajax(settings);
 }
 
-function getSailboats() {
+function getSailboats(message) {
   var token = localStorage.getItem("authToken");
   var settings = {
     url: "/sailboats",
@@ -194,6 +197,7 @@ function getSailboats() {
           state.ownedSailboats.push(state.sailboats[i]);
         }
       }
+      $("#success-message").html("<h3>" +  message + "</h3>");
       showCurrentPage("home-page", "navbar");
     }, 
     error: function(err) {
@@ -297,4 +301,9 @@ function findSailboats(toSearch) {
   }
   console.log(JSON.stringify(state.searchedSailboats));
   displaySailboats(state.searchedSailboats, "search-page", "search-results-table");
+}
+
+function clearSearch() {
+  state.searchedSailboats = [];
+  $("#search-results-table").html('');
 }

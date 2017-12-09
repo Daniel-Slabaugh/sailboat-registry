@@ -76,6 +76,12 @@ $(document).ready(function() {
     e.preventDefault();
     showCurrentPage("register-page", "navbar");
   });
+
+  $(document).on("click", ".btnDelete", function() {
+    console.log("delete clicked");
+    var id = $(this).attr("name");
+    deleteSailboat(id);
+  })
 });
 
 function registerUser(user) {
@@ -141,6 +147,24 @@ function editSailboat(sailboat) {
     contentType: 'application/json',
     type: 'POST',
     data: JSON.stringify(sailboat),
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    success: function (data) {}, 
+    error: function(err) {
+      handleError(err);
+    }  
+  };
+  $.ajax(settings);
+}
+
+function deleteSailboat(id) {
+  console.log("delete called")
+  var token = localStorage.getItem("authToken");
+  var settings = {
+    url: `/sailboats/${id}`,
+    contentType: 'application/json',
+    type: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`
     },

@@ -38,12 +38,7 @@ $(document).ready(function() {
     let user = {};
     user.username = $("#emailLogin").val().trim();
     user.password = $("#passwordLogin").val().trim();
-    var confirmPass = $("#confirmPass").val().trim();
-    if(user.password == confirmPass) {
-      loginUser(user);
-    } else {
-        window.confirm('Your passwords must match');
-    }
+    loginUser(user);
   });
 
   $("#signup").submit(function(e) {
@@ -52,7 +47,12 @@ $(document).ready(function() {
     user.name = $("#name").val().trim();
     user.username = $("#email").val().trim();
     user.password = $("#password").val().trim();
-    registerUser(user);
+    var confirmPass = $("#confirmPass").val().trim();
+    if(user.password == confirmPass) {
+      registerUser(user);
+    } else {
+      window.confirm('Your passwords must match');
+    }
   });
 
   $("#register-sailboat").submit(function(e) {
@@ -63,9 +63,26 @@ $(document).ready(function() {
     sailboat.description = $("#description").val().trim();
     sailboat.condition = $("#condition").val().trim();
     sailboat.year = $("#year").val().trim();
+    sailboat.state = $("#state").val().trim();
     sailboat.picture = $("#picture").val().trim();
     createSailboat(sailboat);
   }); 
+
+  $("#edit-sailboat").submit(function(e) {
+    e.preventDefault();
+    let sailboat = {};
+    sailboat.name = $("#nameE").val().trim();
+    sailboat.owner = state.owner;
+    sailboat.description = $("#descriptionE").val().trim();
+    sailboat.condition = $("#conditionE").val().trim();
+    sailboat.year = $("#yearE").val().trim();
+    sailboat.state = $("#stateE").val().trim();
+    sailboat.picture = $("#pictureE").val().trim();
+    sailboat.id = $("#edit-sailboat").attr("name");
+    console.log(sailboat.id);
+    editSailboat(sailboat);
+  }); 
+
 
   $("#search-form").submit(function(e) {
     e.preventDefault();
@@ -80,12 +97,14 @@ $(document).ready(function() {
 
   $(document).on("click", ".btnDelete", function() {
     var id = $(this).attr("name");
-    deleteSailboat(id);
+    if (window.confirm("Are you sure you want to delete this Sailboat?")) {
+      deleteSailboat(id);
+    }
   });
 
   $(document).on("click", ".btnEdit", function() {
     var id = $(this).attr("name");
-    editSailboat(id);
+    changeSailboat(id);
   });
 
   $("#btnUpdateSailbot").click(function(e) {
@@ -156,14 +175,16 @@ function createSailboat(sailboat) {
 function editSailboat(sailboat) {
   var token = localStorage.getItem("authToken");
   var settings = {
-    url: "/sailboats",
+    url: `/sailboats/${sailboat.id}`,
     contentType: 'application/json',
-    type: 'POST',
+    type: 'PUT',
     data: JSON.stringify(sailboat),
     headers: {
       Authorization: `Bearer ${token}`
     },
-    success: function (data) {}, 
+    success: function (data) {
+      getSailboats("Sailboat Successfully Edited");
+    }, 
     error: function(err) {
       handleError(err);
     }  
@@ -229,6 +250,7 @@ function showCurrentPage() {
   $("#home-page").hide();
   $("#search-page").hide();
   $("#profile-page").hide();
+  $("#edit-page").hide();
   for (i=0; i<arguments.length; i++) {
     $(`#${arguments[i]}`).show();
     if(arguments[i] == "home-page" || arguments[i] == "search-page" || arguments[i] == "profile-page") {
@@ -313,7 +335,7 @@ function clearSearch() {
   $("#search-results-table").html('');
 }
 
-function selectNavbarBtn (btn) {
+function selectNavbarBtn(btn) {
   $("#nav-home").removeClass("selected");
   $("#nav-search").removeClass("selected");
   $("#nav-profile").removeClass("selected");
@@ -325,4 +347,22 @@ function selectNavbarBtn (btn) {
   } else if(btn == "profile-page") {
       $(`#nav-profile`).addClass("selected")
   }
+}
+
+function changeSailboat(id) {
+  var sailboat = {};
+  for(var i=0; i<state.sailboats.length; i++) {
+    if(state.sailboats[i].id == id) {
+      sailboat = state.sailboats[i];
+    }
+  }
+  console.log(sailboat);
+  $("#nameE:text").val(sailboat.name);
+  $("#descriptionE").val(sailboat.description);
+  $("#conditionE").val(sailboat.condition);
+  $("#yearE").val(sailboat.year);
+  $("#stateE").val(sailboat.state);
+  $("#pictureE").val(sailboat.picture);
+  $("#edit-sailboat").attr("name", id);
+  showCurrentPage("edit-page", "navbar");
 }

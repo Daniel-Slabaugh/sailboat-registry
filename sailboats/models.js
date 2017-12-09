@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 
 const sailboatSchema = mongoose.Schema({
   owner: {required: true, type: String},
-  state: String,
   name: String,
   description: String, 
   year: String, 
   condition: String,
-  forSale: Boolean,
+  state: String,
   picture: String
 });
 
@@ -21,7 +20,7 @@ sailboatSchema.methods.simpleSailboat = function() {
     description: this.description, 
     year: this.year, 
     condition: this.condition,
-    forSale: this.forSale,
+    state: this.state,
     picture: this.picture
   };
 }

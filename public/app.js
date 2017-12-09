@@ -238,21 +238,6 @@ function displaySailboats(sailboats, page, container) {
                         '</td>' + 
                         '</tr>');
         console.log(index);
-
-        $(`#btnEditSailboat${index}`).click(function(e) {
-          e.preventDefault();
-          // showCurrentPage("register-page", "navbar");
-          console.log("editing!!!!");
-
-          console.log(e.target.name);
-          console.log(e.target.id);
-
-        });
-
-        // $(".btnDelete").click(function(e) {
-        //   e.preventDefault();
-        //   // showCurrentPage("register-page", "navbar");
-        // });
       });
       $()
   } else {

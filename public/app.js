@@ -206,14 +206,17 @@ function getSailboats(message) {
 
 function showCurrentPage() {
   $("#signup-page").hide();
-  $("#home-page").hide();
   $("#register-page").hide();
   $("#navbar").hide();
   $("#landing-page").hide();
+  $("#home-page").hide();
   $("#search-page").hide();
   $("#profile-page").hide();
   for (i=0; i<arguments.length; i++) {
     $(`#${arguments[i]}`).show();
+    if(arguments[i] == "home-page" || arguments[i] == "search-page" || arguments[i] == "profile-page") {
+      selectNavbarBtn(arguments[i]);
+    }
   }
 }
 
@@ -306,5 +309,15 @@ function clearSearch() {
 }
 
 function selectNavbarBtn (btn) {
-
+  console.log("selecting button" + btn);
+  $("#nav-home").removeClass("selected");
+  $("#nav-search").removeClass("selected");
+  $("#nav-profile").removeClass("selected");
+  if(btn == "home-page") {
+      $(`#nav-home`).addClass("selected")
+  } else if(btn == "search-page") {
+      $(`#nav-search`).addClass("selected")
+  } else if(btn == "profile-page") {
+      $(`#nav-profile`).addClass("selected")
+  }
 }

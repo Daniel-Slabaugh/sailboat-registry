@@ -1,7 +1,3 @@
-.hidden {
-    display: none;
-}
-
 /* Add a black background color to the top navigation */
 .navbar {
     background-color: #333;
@@ -29,13 +25,13 @@
     color: black;
 }
 
-.navbar .selected {
+/*.selected {
     background-color: #ddd;
     color: black;
-}
+}*/
 
 /* Add a color to the active/current link */
-.navbar button.active {
+.navbar button.selected {
     background-color: #4CAF50;
     color: white;
 }

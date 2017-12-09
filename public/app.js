@@ -28,11 +28,6 @@ $(document).ready(function() {
     showCurrentPage("search-page", "navbar");
   });
 
-  $("#nav-edit").click(function(e) {
-    e.preventDefault();
-    showCurrentPage("edit-page", "navbar");
-  });  
-
   $("#nav-profile").click(function(e) {
     e.preventDefault();
     displaySailboats(state.ownedSailboats, "profile-page", "owned-sailboats-table");
@@ -308,4 +303,8 @@ function findSailboats(toSearch) {
 function clearSearch() {
   state.searchedSailboats = [];
   $("#search-results-table").html('');
+}
+
+function selectNavbarBtn (btn) {
+
 }

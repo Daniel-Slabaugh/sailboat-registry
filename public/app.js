@@ -187,8 +187,10 @@ function getSailboats(message) {
       Authorization: `Bearer ${token}`
     },
     success: function (data) {
+      state.sailboats = [];
       state.sailboats = data;
       console.log(JSON.stringify(state.sailboats));
+      state.ownedSailboats = [];
       for(i=0; i<state.sailboats.length; i++) {
         if (state.sailboats[i].owner == state.owner) {
           state.ownedSailboats.push(state.sailboats[i]);
@@ -224,30 +226,30 @@ function displaySailboats(sailboats, page, container) {
   var resultElement = '';
   if (sailboats.length > 0) {
     sailboats.forEach(function(object, index) {
-      resultElement +=  ('<tr>' + 
-                        '<td>' + 
-                          '<p><img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;"></p>' +
-                        '</td>' + 
-                        '<td><h3>Owner:</h3><p>' + object.owner + '</p><br>' + 
+      resultElement +=  ('<div class="row">' + 
+                        '<div class="col-6">' + 
+                          '<img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;">' +
+                        '</div>' + 
+                        '<div class="col-3"><h3>Owner:</h3><p>' + object.owner + '</p><br>' + 
                           '<h3>Name:</h3><p>' + object.name + '</p><br>' + 
                           '<h3>Description:</h3><p>' + object.description + '</p><br>' + 
                           '<h3>Condition:</h3><p>' + object.condition + '</p><br>' + 
                           '<h3>Year:</h3><p>' + object.year + '</p><br>' + 
-                        '</td>' + 
-                        '<td>' +     
+                        '</div>' + 
+                        '<div class="col-3">' +     
                           '<button class="btn btnEdit" id="btnEditSailboat' + index + 
                               '" name="' + object.id + '" type="button">Edit</button>' +
                           '<button class="btn btnDelete" id="btnDeleteSailboat' + index + 
                               '" name="' + object.id + '"type="button">Delete</button>' +
-                        '</td>' + 
-                        '</tr>');
+                        '</div>' + 
+                        '</div>');
         console.log(index);
       });
-      $()
   } else {
       resultElement += '<h2>No sailboats here</h2>';
   }
   console.log(resultElement);
+  $(`#${container}`).empty();
   $(`#${container}`).html(resultElement);
   showCurrentPage(page, "navbar");
 }

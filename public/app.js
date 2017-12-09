@@ -309,7 +309,6 @@ function clearSearch() {
 }
 
 function selectNavbarBtn (btn) {
-  console.log("selecting button" + btn);
   $("#nav-home").removeClass("selected");
   $("#nav-search").removeClass("selected");
   $("#nav-profile").removeClass("selected");

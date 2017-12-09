@@ -25,11 +25,6 @@
     color: black;
 }
 
-/*.selected {
-    background-color: #ddd;
-    color: black;
-}*/
-
 /* Add a color to the active/current link */
 .navbar button.selected {
     background-color: #4CAF50;

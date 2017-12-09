@@ -254,19 +254,7 @@ function displaySailboats(sailboats, page, container) {
 
 function handleError(err) {
   console.log(err);
-  var resultElement = '';
-  resultElement +=  ('<div id="myModal" class="modal">' +
-                      '<div class="modal-content">' + 
-                        '<span class="close">&times;</span>' +
-                        '<p>Error! Your call failed with error:</p>' +
-                        '<p>' + err.status + ' ' + err.responseText + '</p>' +
-                      '</div>' +
-                    '</div>')
-  $("#modal").html(resultElement);
-  $("#modal").click(function(e) {
-    e.preventDefault();
-    $("#modal").html('');
-  });
+  window.confirm('Your call failed with error: ' + err.status + ' ' + err.responseText);
 }
 
 //search function 
@@ -313,6 +301,7 @@ function selectNavbarBtn (btn) {
   $("#nav-search").removeClass("selected");
   $("#nav-profile").removeClass("selected");
   if(btn == "home-page") {
+
       $(`#nav-home`).addClass("selected")
   } else if(btn == "search-page") {
       $(`#nav-search`).addClass("selected")

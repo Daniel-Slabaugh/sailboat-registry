@@ -7,7 +7,7 @@
 */
 
 .container {
-  transition: background 1.5s linear;
+  transition: background 1.5s linear, color 1.5s linear;
   background-size: cover;                 
   background-repeat: no-repeat;
   background: opacity(.3);

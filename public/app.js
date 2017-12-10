@@ -299,22 +299,24 @@ function displaySailboats(sailboats, page, container) {
                             '<h4>Condition:</h4><p>' + object.condition + '</p>' + 
                             '<h4>State:</h4><p>' + object.state + '</p>' + 
                             '<h4>Year:</h4><p>' + object.year + '</p>' + 
-                          '</div>' + 
-                          '<div class="col-3">' +     
-                            '<button class="btn btnEdit" id="btnEditSailboat' + index + 
-                                '" name="' + object.id + '" type="button">Edit</button>' +
-                            '<button class="btn btnDelete" id="btnDeleteSailboat' + index + 
-                                '" name="' + object.id + '"type="button">Delete</button>' +
-                          '</div>' + 
-                        '</div>');
+                          '</div>');
+        if(page != "search-page") {
+          resultElement +=  ('<div class="col-3">' +     
+                              '<button class="btn btnEdit" id="btnEditSailboat' + index + 
+                                  '" name="' + object.id + '" type="button">Edit</button>' +
+                              '<button class="btn btnDelete" id="btnDeleteSailboat' + index + 
+                                  '" name="' + object.id + '"type="button">Delete</button>' +
+                            '</div>');
+        }
+        resultElement +=  '</div>'
       } else if(index < 16) {
         resultElement +=  ('<div class="row">' + 
                             '<div class="col-6">' + 
                               '<img src="' + object.picture + '" alt="Invalid Picture URL" style="height:150px;">' +
                             '</div>') 
-      }
-      if(index%2 == 1) {
-        resultElement += '</div>';
+        if(index%2 == 1) {
+          resultElement += '</div>';
+        }
       }
     });
   } else {

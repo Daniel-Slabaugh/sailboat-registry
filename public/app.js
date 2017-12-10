@@ -37,30 +37,6 @@ $(document).ready(function() {
     showCurrentPage("signup-page");
   });
 
-  $("#nav-home").click(function(e) {
-    e.preventDefault();
-    displaySailboats(state.sailboats, "home-page", "home-sailboats");
-  });
-
-  $("#nav-search").click(function(e) {
-    e.preventDefault();
-    clearSearch();
-    showCurrentPage("search-page", "navbar");
-  });
-
-  $("#nav-profile").click(function(e) {
-    e.preventDefault();
-    displaySailboats(state.ownedSailboats, "profile-page", "owned-sailboats");
-  });
-
-  $("#login").submit(function(e) {
-    e.preventDefault();
-    let user = {};
-    user.username = $("#emailLogin").val().trim();
-    user.password = $("#passwordLogin").val().trim();
-    loginUser(user);
-  });
-
   $("#signup").submit(function(e) {
     e.preventDefault();
     let user = {};
@@ -73,6 +49,49 @@ $(document).ready(function() {
     } else {
       window.confirm('Your passwords must match');
     }
+  });
+
+  $("#login").submit(function(e) {
+    e.preventDefault();
+    let user = {};
+    user.username = $("#emailLogin").val().trim();
+    user.password = $("#passwordLogin").val().trim();
+    loginUser(user);
+  });
+
+  $("#nav-home").click(function(e) {
+    e.preventDefault();
+    $(".container").css("background-color", backgroundColors[1]);
+    $(".container").css("color", textColors[1]);
+    displaySailboats(state.sailboats, "home-page", "home-sailboats");
+  });
+
+  $("#nav-search").click(function(e) {
+    e.preventDefault();
+    $(".container").css("background-color", backgroundColors[3]);
+    $(".container").css("color", textColors[3]);
+    clearSearch();
+    showCurrentPage("search-page", "navbar");
+  });
+
+  $("#search-form").submit(function(e) {
+    e.preventDefault();
+    var search = $("#search").val().trim();
+    findSailboats(search);
+  }); 
+
+  $("#nav-profile").click(function(e) {
+    e.preventDefault();
+    $(".container").css("background-color", backgroundColors[0]);
+    $(".container").css("color", textColors[0]);
+    displaySailboats(state.ownedSailboats, "profile-page", "owned-sailboats");
+  });
+
+  $("#btnCreate").click(function(e) {
+    e.preventDefault();
+    $(".container").css("background-color", backgroundColors[3]);
+    $(".container").css("color", textColors[3]);
+    showCurrentPage("register-page", "navbar");
   });
 
   $("#register-sailboat").submit(function(e) {
@@ -88,8 +107,17 @@ $(document).ready(function() {
     createSailboat(sailboat);
   }); 
 
+  $(document).on("click", ".btnEdit", function() {
+    var id = $(this).attr("name");
+    $(".container").css("background-color", backgroundColors[4]);
+    $(".container").css("color", textColors[4]);
+    changeSailboat(id);
+  });
+
   $("#edit-sailboat").submit(function(e) {
     e.preventDefault();
+    $(".container").css("background-color", backgroundColors[5]);
+    $(".container").css("color", textColors[5]);
     let sailboat = {};
     sailboat.name = $("#nameE").val().trim();
     sailboat.owner = state.owner;
@@ -102,34 +130,12 @@ $(document).ready(function() {
     editSailboat(sailboat);
   }); 
 
-  $("#search-form").submit(function(e) {
-    e.preventDefault();
-    var search = $("#search").val().trim();
-    findSailboats(search);
-  }); 
-
-  $("#btnCreate").click(function(e) {
-    e.preventDefault();
-    showCurrentPage("register-page", "navbar");
-  });
-
   $(document).on("click", ".btnDelete", function() {
     var id = $(this).attr("name");
     if (window.confirm("Are you sure you want to delete this Sailboat?")) {
       deleteSailboat(id);
     }
   });
-
-  $(document).on("click", ".btnEdit", function() {
-    var id = $(this).attr("name");
-    changeSailboat(id);
-  });
-
-  $("#btnUpdateSailbot").click(function(e) {
-    e.preventDefault();
-    showCurrentPage("register-page", "navbar");
-  });
-
 });
 
 function registerUser(user) {
@@ -249,6 +255,8 @@ function getSailboats(message) {
       }
       $("#success-message").html("<h2>" +  message + "</h2>");
       $(".container").removeClass("color-rotate");      //remove background rotate
+      $(".container").css("background-color", "rgba(172, 60, 48, 1)"); // set home background color
+      $(".container").css("color", "rgba(20, 24, 42, 1)"); // set home text color
       displaySailboats(state.sailboats, "home-page", "home-sailboats");
     }, 
     error: function(err) {

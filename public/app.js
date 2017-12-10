@@ -39,7 +39,7 @@ $(document).ready(function() {
 
   $("#nav-home").click(function(e) {
     e.preventDefault();
-    showCurrentPage("home-page", "navbar");
+    displaySailboats(state.sailboats, "home-page", "home-sailboats");
   });
 
   $("#nav-search").click(function(e) {
@@ -279,12 +279,12 @@ function displaySailboats(sailboats, page, container) {
   var resultElement = '';
   if (sailboats.length > 0) {
     sailboats.forEach(function(object, index) {
-      resultElement +=  ('<div class="row">' + 
-                        '<div class="col-6">' + 
-                          '<img src="' + object.picture + '" alt="Invalid Picture URL">' +
-                        '</div>') 
       if(page != "home-page") {
-        resultElement += ('<div class="col-3">' +
+        resultElement += ('<div class="row">' + 
+                          '<div class="col-6">' + 
+                            '<img src="' + object.picture + '" alt="Invalid Picture URL" style="height:300px;">' +
+                          '</div>' + 
+                          '<div class="col-3">' +
                             '<h4>Owner:</h4><p>' + object.owner + '</p>' + 
                             '<h4>Name:</h4><p>' + object.name + '</p>' + 
                             '<h4>Description:</h4><p>' + object.description + '</p>' + 
@@ -299,6 +299,11 @@ function displaySailboats(sailboats, page, container) {
                                 '" name="' + object.id + '"type="button">Delete</button>' +
                           '</div>' + 
                         '</div>');
+      } else {
+        resultElement +=  ('<div class="row">' + 
+                            '<div class="col-6">' + 
+                              '<img src="' + object.picture + '" alt="Invalid Picture URL" style="height:150px;">' +
+                            '</div>') 
       }
       if(index%2 == 1) {
         resultElement += '</div>';

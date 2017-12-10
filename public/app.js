@@ -9,27 +9,18 @@ var state = {
 };
 
 $(document).ready(function() {
-  // var picUrls = ["main.jpg", "sailboat-1.jpeg"];
-  // infiniteRotator(picUrls);
-    // white: rgba(253, 242, 202, 1)
-    // red:   rgba(172, 60, 48, 1) 
-    // blue:  rgba(20, 24, 42, 1)
-    // teal:  rgba(101, 150, 143, 1) 
-    // sky:   rgba(198, 233, 229, 1)
-
   var backgroundColors = ["rgba(253, 242, 202, 1)", 
                 "rgba(172, 60, 48, 1)", 
                 "rgba(20, 24, 42, 1)",
                 "rgba(101, 150, 143, 1)",
                 "rgba(198, 233, 229, 1)"];
-
   var textColors = ["rgba(20, 24, 42, 1)", 
                     "rgba(20, 24, 42, 1)", 
                     "rgba(253, 242, 202, 1)", 
                     "rgba(172, 60, 48, 1)",
                     "rgba(172, 60, 48, 1)"]
-  colorRotator(backgroundColors, textColors);
 
+  colorRotator(backgroundColors, textColors);
   showCurrentPage("landing-page");
 
   $("#btnSignup").click(function(e) {
@@ -166,7 +157,7 @@ function loginUser(user) {
     success: function(test) {
       localStorage.setItem("authToken", test.authToken);
       state.owner = user.username;
-      getSailboats("");
+      getSailboats("Welcome to paradise");
     },
     error: function(err) {
       handleError(err);

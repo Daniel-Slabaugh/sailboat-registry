@@ -15,59 +15,59 @@
 
 /* Add a black background color to the top navigation */
 .navbar {
-    background-color: rgba(20, 24, 42, 1);
-    overflow: hidden;
+  background-color: rgba(20, 24, 42, 1);
+  overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .navbar button {
-    float: left;
-    display: block;
-    color: rgba(172, 60, 48, 1) ;
-    background-color: rgba(20, 24, 42, 1);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    border: hidden;
-    outline: 0;
-    border-radius: 0;
+  float: left;
+  display: block;
+  color: rgba(172, 60, 48, 1) ;
+  background-color: rgba(20, 24, 42, 1);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: hidden;
+  outline: 0;
+  border-radius: 0;
 }
 
 /* Change the color of links on hover */
 .navbar button:hover {
-    background-color: rgba(253, 242, 202, 1);
-    color: rgba(20, 24, 42, 1);
+  background-color: rgba(253, 242, 202, 1);
+  color: rgba(20, 24, 42, 1);
 }
 
 /* Add a color to the active/current link */
 .navbar button.selected {
-    background-color: rgba(253, 242, 202, 1);
-    color: rgba(20, 24, 42, 1);
+  background-color: rgba(253, 242, 202, 1);
+  color: rgba(20, 24, 42, 1);
 }
 
 .btn {
-    width:100%;
+  width:100%;
 }
 
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 h4 {
-    margin: 0px;
+  margin: 0px;
 }
 
 p {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
 input {
-    width: 100%;
-    border-radius: 5px;
+  width: 100%;
+  border-radius: 5px;
 }
 
 img {
-    width:100%; 
-    margin-top:10px;
+  width:100%; 
+  margin-top:10px;
 }

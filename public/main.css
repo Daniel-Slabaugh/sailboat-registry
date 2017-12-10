@@ -2,14 +2,14 @@
     white: rgba(253, 242, 202, 1)
     red:   rgba(172, 60, 48, 1) 
     blue:  rgba(20, 24, 42, 1)
-    teal:  rgba(101, 150, 143, 1) */
+    teal:  rgba(101, 150, 143, 1) 
+    sky:   rgba(198, 233, 229, 1)
+*/
 
-.container {
+.color-rotate {
   transition: background 1.5s linear;
   background-size: cover;                 
   background-repeat: no-repeat;
-  background-color: rgba(166, 171, 165, 1);
-  color: black;
   background: opacity(.3);
 }
 

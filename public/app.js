@@ -9,8 +9,26 @@ var state = {
 };
 
 $(document).ready(function() {
-  var picUrls = ["main.jpg", "sailboat-1.jpeg"];
-  infiniteRotator(picUrls);
+  // var picUrls = ["main.jpg", "sailboat-1.jpeg"];
+  // infiniteRotator(picUrls);
+    // white: rgba(253, 242, 202, 1)
+    // red:   rgba(172, 60, 48, 1) 
+    // blue:  rgba(20, 24, 42, 1)
+    // teal:  rgba(101, 150, 143, 1) 
+    // sky:   rgba(198, 233, 229, 1)
+
+  var backgroundColors = ["rgba(253, 242, 202, 1)", 
+                "rgba(172, 60, 48, 1)", 
+                "rgba(20, 24, 42, 1)",
+                "rgba(101, 150, 143, 1)",
+                "rgba(198, 233, 229, 1)"];
+
+  var textColors = ["rgba(20, 24, 42, 1)", 
+                    "rgba(20, 24, 42, 1)", 
+                    "rgba(253, 242, 202, 1)", 
+                    "rgba(172, 60, 48, 1)",
+                    "rgba(172, 60, 48, 1)"]
+  colorRotator(backgroundColors, textColors);
 
   showCurrentPage("landing-page");
 
@@ -266,20 +284,24 @@ function displaySailboats(sailboats, page, container) {
                           '<img src="' + object.picture + '" alt="Invalid Picture URL">' +
                         '</div>') 
       if(page != "home-page") {
-        resultElement += ('<div class="col-3"><h4>Owner:</h4><p>' + object.owner + '</p>' + 
-                          '<h4>Name:</h4><p>' + object.name + '</p>' + 
-                          '<h4>Description:</h4><p>' + object.description + '</p>' + 
-                          '<h4>Condition:</h4><p>' + object.condition + '</p>' + 
-                          '<h4>State:</h4><p>' + object.state + '</p>' + 
-                          '<h4>Year:</h4><p>' + object.year + '</p>' + 
-                        '</div>' + 
-                        '<div class="col-3">' +     
-                          '<button class="btn btnEdit" id="btnEditSailboat' + index + 
-                              '" name="' + object.id + '" type="button">Edit</button>' +
-                          '<button class="btn btnDelete" id="btnDeleteSailboat' + index + 
-                              '" name="' + object.id + '"type="button">Delete</button>' +
-                        '</div>' + 
+        resultElement += ('<div class="col-3">' +
+                            '<h4>Owner:</h4><p>' + object.owner + '</p>' + 
+                            '<h4>Name:</h4><p>' + object.name + '</p>' + 
+                            '<h4>Description:</h4><p>' + object.description + '</p>' + 
+                            '<h4>Condition:</h4><p>' + object.condition + '</p>' + 
+                            '<h4>State:</h4><p>' + object.state + '</p>' + 
+                            '<h4>Year:</h4><p>' + object.year + '</p>' + 
+                          '</div>' + 
+                          '<div class="col-3">' +     
+                            '<button class="btn btnEdit" id="btnEditSailboat' + index + 
+                                '" name="' + object.id + '" type="button">Edit</button>' +
+                            '<button class="btn btnDelete" id="btnDeleteSailboat' + index + 
+                                '" name="' + object.id + '"type="button">Delete</button>' +
+                          '</div>' + 
                         '</div>');
+      }
+      if(index%2 == 1) {
+        resultElement += '</div>';
       }
     });
   } else {
@@ -364,24 +386,22 @@ function changeSailboat(id) {
   showCurrentPage("edit-page", "navbar");
 }
 
-function infiniteRotator(urls)  {
+function colorRotator(backgroundColors, textColors)  {
 
   var itemInterval = 5000;
-
-  var numberOfItems = urls.length;
-
+  var numberOfItems = backgroundColors.length;
   var currentItem = 0;
 
   var background = $('.container')
-  background.css({"background-image":"url(" + urls[currentItem] + ")"});
+  background.css("background-color", backgroundColors[currentItem]);
+  background.css("color", textColors[currentItem]);
   var infiniteLoop = setInterval(function() {
-
     if (currentItem == numberOfItems - 1) {
       currentItem = 0;
     } else {
       currentItem++;
     }
-    background.css({"background-image":"url(" + urls[currentItem] + ")"});
-
+    background.css("background-color", backgroundColors[currentItem]);
+    background.css("color", textColors[currentItem]);       
   }, itemInterval);
 }

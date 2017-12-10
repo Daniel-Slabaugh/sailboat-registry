@@ -248,8 +248,8 @@ function getSailboats(message) {
         }
       }
       $("#success-message").html("<h2>" +  message + "</h2>");
+      $(".container").removeClass("color-rotate");      //remove background rotate
       displaySailboats(state.sailboats, "home-page", "home-sailboats");
-      // showCurrentPage("home-page", "navbar");
     }, 
     error: function(err) {
       handleError(err);
@@ -392,16 +392,19 @@ function colorRotator(backgroundColors, textColors)  {
   var numberOfItems = backgroundColors.length;
   var currentItem = 0;
 
-  var background = $('.container')
+  var background = $('.color-rotate')
   background.css("background-color", backgroundColors[currentItem]);
   background.css("color", textColors[currentItem]);
   var infiniteLoop = setInterval(function() {
-    if (currentItem == numberOfItems - 1) {
-      currentItem = 0;
-    } else {
-      currentItem++;
-    }
-    background.css("background-color", backgroundColors[currentItem]);
-    background.css("color", textColors[currentItem]);       
+    console.log(background.attr("class"));
+    if(background.attr("class") == "container color-rotate") {
+      if (currentItem == numberOfItems - 1) {
+        currentItem = 0;
+      } else {
+        currentItem++;
+      }
+      background.css("background-color", backgroundColors[currentItem]);
+      background.css("color", textColors[currentItem]);    
+    }   
   }, itemInterval);
 }

@@ -3,16 +3,16 @@ const chaiHttp = require('chai-http');
 const should = chai.should();
 const faker = require('faker');
 const mongoose = require('mongoose');
-
+const jwt = require('jsonwebtoken');
 
 const {DATABASE_URL} = require('../config');
 const {Sailboat} = require('../sailboats');
 const {closeServer, runServer, app} = require('../server');
 const {TEST_DATABASE_URL} = require('../config');
-
+const {JWT_SECRET} = require('../config');
+const {User} = require('../users');
 
 chai.use(chaiHttp);
-
 
 function tearDownDb() {
   return new Promise((resolve, reject) => {
@@ -29,27 +29,35 @@ function seedSailboatData() {
   for (let i=1; i<=10; i++) {
     seedData.push({
       owner: faker.name.firstName(),
-      address: {
-        street: faker.address.streetAddress(),
-        city: faker.address.city(),
-        state: faker.address.state(),
-        zipcode: faker.address.zipCode(),
-        country: faker.address.country()
-      },
+      state: faker.address.state(),
       name: faker.name.firstName(),
       description: faker.lorem.sentence(),
       condition: faker.random.words(),
       year: faker.date.past(),
-      visible: faker.random.boolean(),
-      forSale: faker.random.boolean()
     });
   }
   // this will return a promise
   return Sailboat.insertMany(seedData);
 }
 
-
 describe('Sailboat server resource', function() {
+  const username = 'exampleUser';
+  const password = 'examplePass';
+  const name = 'User';    
+  const token = jwt.sign(
+    {
+      user: {
+        username,
+        name
+      }
+    },
+    JWT_SECRET,
+    {
+      algorithm: 'HS256',
+      subject: username,
+      expiresIn: '7d'
+    }
+  );
 
   before(function() {
     return runServer(TEST_DATABASE_URL);
@@ -70,23 +78,12 @@ describe('Sailboat server resource', function() {
   });
 
   describe('GET endpoint', function() {
-
-    // it('simple get should work', function() {
-    //   let res;
-    //   return chai.request(app)
-    //     .get('/')
-    //     .then(_res => {
-    //       res = _res;
-    //       res.should.have.status(200);
-    //     })
-    // });
-
-
-
     it('should return all existing sailboats', function() {
       let res;
-      return chai.request(app)
+      return chai
+        .request(app)
         .get('/sailboats')
+        .set('authorization', `Bearer ${token}`)
         .then(_res => {
           res = _res;
           res.should.have.status(200);
@@ -109,29 +106,22 @@ describe('Sailboat server resource', function() {
 
       const newSailboat =  {     
         owner: faker.name.firstName(),
-        address: {
-          street: faker.address.streetAddress(),
-          city: faker.address.city(),
-          state: faker.address.state(),
-          zipcode: faker.address.zipCode(),
-          country: faker.address.country()
-        },
+        state: faker.address.state(),
         name: faker.random.words(),
         description: faker.lorem.sentence(),
         condition: faker.random.words(),
         year: faker.date.past(),
-        visible: faker.random.boolean(),
-        forSale: faker.random.boolean()
       }
 
       return chai.request(app)
         .post('/sailboats')
+        .set('authorization', `Bearer ${token}`)
         .send(newSailboat)
         .then(function(res) {
           res.should.have.status(201);
           res.should.be.json;
           res.body.should.be.a('object');
-          res.body.should.include.keys('id', 'owner', 'address', 'name', 'description', 'condition', 'year', 'visible', 'forSale');
+          res.body.should.include.keys('id', 'owner', 'state', 'name', 'description', 'condition', 'year');
           res.body.owner.should.equal(newSailboat.owner)
           res.body.id.should.not.be.null;
           res.body.name.should.equal(newSailboat.name);
@@ -141,12 +131,10 @@ describe('Sailboat server resource', function() {
         })
         .then(function(sailboat) {
           sailboat.owner.should.equal(newSailboat.owner);
-          // sailboat.address.should.equal(newSailboat.address);
+          sailboat.state.should.equal(newSailboat.state);
           sailboat.name.should.equal(newSailboat.name);
           sailboat.description.should.equal(newSailboat.description);
           sailboat.condition.should.equal(newSailboat.condition);
-          sailboat.visible.should.equal(newSailboat.visible);
-          sailboat.forSale.should.equal(newSailboat.forSale);
         });
     });
   });
@@ -155,18 +143,10 @@ describe('Sailboat server resource', function() {
 
     it('should update fields you send over', function() {
       const updateData = {
-        address: {
-          street: faker.address.streetAddress(),
-          city: faker.address.city(),
-          zipcode: faker.address.zipCode(),
-          state: faker.address.state(),
-          country: faker.address.country()
-        },
+        state: faker.address.state(),
         name: faker.name.firstName(),
         description: faker.lorem.sentence(),
         condition: faker.random.words(), 
-        visible: faker.random.boolean(),
-        forSale: faker.random.boolean(),
       };
 
       return Sailboat
@@ -175,8 +155,10 @@ describe('Sailboat server resource', function() {
         .then(function(sailboat) {
           updateData.id = sailboat.id;
 
-          return chai.request(app)
+          return chai
+            .request(app)
             .put(`/sailboats/${sailboat.id}`)
+            .set('authorization', `Bearer ${token}`)
             .send(updateData);
         })
         .then(function(res) {
@@ -185,12 +167,10 @@ describe('Sailboat server resource', function() {
           return Sailboat.findById(updateData.id).exec();
         })
         .then(function(sailboat) {
-          // sailboat.address.should.equal(newSailboat.address);
+          sailboat.state.should.equal(updateData.state);
           sailboat.name.should.equal(updateData.name);
           sailboat.description.should.equal(updateData.description);
           sailboat.condition.should.equal(updateData.condition);
-          sailboat.visible.should.equal(updateData.visible);
-          sailboat.forSale.should.equal(updateData.forSale);
         });
     });
   });
@@ -210,7 +190,10 @@ describe('Sailboat server resource', function() {
         .exec()
         .then(function(_sailboat) {
           sailboat = _sailboat;
-          return chai.request(app).delete(`/sailboats/${sailboat.id}`);
+          return chai
+            .request(app)
+            .delete(`/sailboats/${sailboat.id}`)
+            .set('authorization', `Bearer ${token}`);
         })
         .then(function(res) {
           res.should.have.status(204);

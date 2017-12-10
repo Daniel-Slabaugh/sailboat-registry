@@ -9,6 +9,8 @@ var state = {
 };
 
 $(document).ready(function() {
+  var picUrls = ["main.jpg", "sailboat-1.jpeg"];
+  infiniteRotator(picUrls);
 
   showCurrentPage("landing-page");
 
@@ -227,7 +229,7 @@ function getSailboats(message) {
           state.ownedSailboats.push(state.sailboats[i]);
         }
       }
-      $("#success-message").html("<h3>" +  message + "</h3>");
+      $("#success-message").html("<h2>" +  message + "</h2>");
       displaySailboats(state.sailboats, "home-page", "home-sailboats");
       // showCurrentPage("home-page", "navbar");
     }, 
@@ -261,15 +263,15 @@ function displaySailboats(sailboats, page, container) {
     sailboats.forEach(function(object, index) {
       resultElement +=  ('<div class="row">' + 
                         '<div class="col-6">' + 
-                          '<img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;">' +
+                          '<img src="' + object.picture + '" alt="Invalid Picture URL">' +
                         '</div>') 
       if(page != "home-page") {
-        resultElement += ('<div class="col-3"><h3>Owner:</h3><p>' + object.owner + '</p>' + 
-                          '<h3>Name:</h3><p>' + object.name + '</p>' + 
-                          '<h3>Description:</h3><p>' + object.description + '</p>' + 
-                          '<h3>Condition:</h3><p>' + object.condition + '</p>' + 
-                          '<h3>State:</h3><p>' + object.state + '</p>' + 
-                          '<h3>Year:</h3><p>' + object.year + '</p>' + 
+        resultElement += ('<div class="col-3"><h4>Owner:</h4><p>' + object.owner + '</p>' + 
+                          '<h4>Name:</h4><p>' + object.name + '</p>' + 
+                          '<h4>Description:</h4><p>' + object.description + '</p>' + 
+                          '<h4>Condition:</h4><p>' + object.condition + '</p>' + 
+                          '<h4>State:</h4><p>' + object.state + '</p>' + 
+                          '<h4>Year:</h4><p>' + object.year + '</p>' + 
                         '</div>' + 
                         '<div class="col-3">' +     
                           '<button class="btn btnEdit" id="btnEditSailboat' + index + 
@@ -360,4 +362,26 @@ function changeSailboat(id) {
   $("#pictureE").val(sailboat.picture);
   $("#edit-sailboat").attr("name", id);
   showCurrentPage("edit-page", "navbar");
+}
+
+function infiniteRotator(urls)  {
+
+  var itemInterval = 5000;
+
+  var numberOfItems = urls.length;
+
+  var currentItem = 0;
+
+  var background = $('.container')
+  background.css({"background-image":"url(" + urls[currentItem] + ")"});
+  var infiniteLoop = setInterval(function() {
+
+    if (currentItem == numberOfItems - 1) {
+      currentItem = 0;
+    } else {
+      currentItem++;
+    }
+    background.css({"background-image":"url(" + urls[currentItem] + ")"});
+
+  }, itemInterval);
 }

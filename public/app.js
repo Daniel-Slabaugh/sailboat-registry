@@ -30,7 +30,7 @@ $(document).ready(function() {
 
   $("#nav-profile").click(function(e) {
     e.preventDefault();
-    displaySailboats(state.ownedSailboats, "profile-page", "owned-sailboats-table");
+    displaySailboats(state.ownedSailboats, "profile-page", "owned-sailboats");
   });
 
   $("#login").submit(function(e) {
@@ -81,7 +81,6 @@ $(document).ready(function() {
     sailboat.id = $("#edit-sailboat").attr("name");
     editSailboat(sailboat);
   }); 
-
 
   $("#search-form").submit(function(e) {
     e.preventDefault();
@@ -229,7 +228,8 @@ function getSailboats(message) {
         }
       }
       $("#success-message").html("<h3>" +  message + "</h3>");
-      showCurrentPage("home-page", "navbar");
+      displaySailboats(state.sailboats, "home-page", "home-sailboats");
+      // showCurrentPage("home-page", "navbar");
     }, 
     error: function(err) {
       handleError(err);
@@ -262,12 +262,14 @@ function displaySailboats(sailboats, page, container) {
       resultElement +=  ('<div class="row">' + 
                         '<div class="col-6">' + 
                           '<img src="' + object.picture + '" alt="Invalid Picture URL" style="width:500px;height:400px;">' +
-                        '</div>' + 
-                        '<div class="col-3"><h3>Owner:</h3><p>' + object.owner + '</p><br>' + 
-                          '<h3>Name:</h3><p>' + object.name + '</p><br>' + 
-                          '<h3>Description:</h3><p>' + object.description + '</p><br>' + 
-                          '<h3>Condition:</h3><p>' + object.condition + '</p><br>' + 
-                          '<h3>Year:</h3><p>' + object.year + '</p><br>' + 
+                        '</div>') 
+      if(page != "home-page") {
+        resultElement += ('<div class="col-3"><h3>Owner:</h3><p>' + object.owner + '</p>' + 
+                          '<h3>Name:</h3><p>' + object.name + '</p>' + 
+                          '<h3>Description:</h3><p>' + object.description + '</p>' + 
+                          '<h3>Condition:</h3><p>' + object.condition + '</p>' + 
+                          '<h3>State:</h3><p>' + object.state + '</p>' + 
+                          '<h3>Year:</h3><p>' + object.year + '</p>' + 
                         '</div>' + 
                         '<div class="col-3">' +     
                           '<button class="btn btnEdit" id="btnEditSailboat' + index + 
@@ -276,11 +278,11 @@ function displaySailboats(sailboats, page, container) {
                               '" name="' + object.id + '"type="button">Delete</button>' +
                         '</div>' + 
                         '</div>');
-      });
+      }
+    });
   } else {
       resultElement += '<h2>No sailboats here</h2>';
   }
-  console.log(resultElement);
   $(`#${container}`).empty();
   $(`#${container}`).html(resultElement);
   showCurrentPage(page, "navbar");
@@ -321,13 +323,12 @@ function findSailboats(toSearch) {
       }
     }
   }
-  console.log(JSON.stringify(state.searchedSailboats));
-  displaySailboats(state.searchedSailboats, "search-page", "search-results-table");
+  displaySailboats(state.searchedSailboats, "search-page", "search-results");
 }
 
 function clearSearch() {
   state.searchedSailboats = [];
-  $("#search-results-table").html('');
+  $("#search-results").html('');
 }
 
 function selectNavbarBtn(btn) {

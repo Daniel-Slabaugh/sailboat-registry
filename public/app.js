@@ -307,7 +307,7 @@ function displaySailboats(sailboats, page, container) {
                                 '" name="' + object.id + '"type="button">Delete</button>' +
                           '</div>' + 
                         '</div>');
-      } else {
+      } else if(index < 16) {
         resultElement +=  ('<div class="row">' + 
                             '<div class="col-6">' + 
                               '<img src="' + object.picture + '" alt="Invalid Picture URL" style="height:150px;">' +

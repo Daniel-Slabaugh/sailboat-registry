@@ -296,7 +296,7 @@ function displaySailboats(sailboats, page, container) {
                               '<button class="btn btnEdit" id="btnEditSailboat' + index + 
                                   '" name="' + object.id + '" type="button">Edit</button>' +
                               '<button class="btn btnDelete" id="btnDeleteSailboat' + index + 
-                                  '" name="' + object.id + '"type="button">Delete</button>' +
+                                  '" name="' + object.id + '"type="button">Delete</button>' + '<br><br><br><br><br><br>' +
                             '</div>');
         }
         resultElement +=  '</div>'

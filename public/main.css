@@ -53,6 +53,8 @@
   height: 40px;
   border-radius: 5px;
   margin-top: 10px;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .btn:hover {
@@ -83,5 +85,16 @@ p {
 
 img {
   width:100%; 
+}
+
+#home-sailboats img {
   margin-top:10px;
+}
+
+.btnCreate, .btnSearch {
+  font-size: 20px;
+}
+
+.btnEditSailboats, .btnRegisterSailboats {
+  background-color: rgba(253, 242, 202, 1);
 }

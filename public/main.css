@@ -47,7 +47,26 @@
 }
 
 .btn {
-  width:100%;
+  width: 100%;
+  background-color: rgba(198, 233, 229, 1);
+  color: rgba(172, 60, 48, 1);
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: rgba(172, 60, 48, 1);
+  color: rgba(198, 233, 229, 1);
+}
+
+input {
+  width: 100%;
+  border-radius: 5px;
+  height: 30px;
+  background-color: rgba(253, 242, 202, 1);
+  color: rgba(20, 24, 42, 1);
+  margin-bottom: 5px;
 }
 
 h2 {
@@ -60,11 +79,6 @@ h4 {
 
 p {
   margin-top: 0px;
-}
-
-input {
-  width: 100%;
-  border-radius: 5px;
 }
 
 img {

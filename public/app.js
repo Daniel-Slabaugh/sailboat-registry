@@ -240,7 +240,7 @@ function getSailboats(message) {
       state.sailboats = data;
       state.ownedSailboats = [];
       for(i=0; i<state.sailboats.length; i++) {
-        if (state.sailboats[i].owner == state.owner) {
+        if(state.sailboats[i].owner == state.owner) {
           state.ownedSailboats.push(state.sailboats[i]);
         }
       }
@@ -366,12 +366,11 @@ function selectNavbarBtn(btn) {
   $("#nav-search").removeClass("selected");
   $("#nav-profile").removeClass("selected");
   if(btn == "home-page") {
-
-      $(`#nav-home`).addClass("selected")
+    $(`#nav-home`).addClass("selected")
   } else if(btn == "search-page") {
-      $(`#nav-search`).addClass("selected")
+    $(`#nav-search`).addClass("selected")
   } else if(btn == "profile-page") {
-      $(`#nav-profile`).addClass("selected")
+    $(`#nav-profile`).addClass("selected")
   }
 }
 

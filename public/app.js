@@ -157,6 +157,7 @@ function loginUser(user) {
     success: function(test) {
       localStorage.setItem("authToken", test.authToken);
       state.owner = user.username;
+      $("#userInfo").html(user.username);
       getSailboats("Welcome to paradise");
     },
     error: function(err) {
@@ -301,13 +302,10 @@ function displaySailboats(sailboats, page, container) {
         }
         resultElement +=  '</div>'
       } else if(index < 16) {
-        resultElement +=  ('<div class="row">' + 
-                            '<div class="col-6">' + 
+        console.log(index%2 ==1);
+        resultElement +=   ('<div class="col-6">' + 
                               '<img src="' + object.picture + '" alt="Invalid Picture URL" style="height:150px;">' +
-                            '</div>') 
-        if(index%2 == 1) {
-          resultElement += '</div>';
-        }
+                            '</div>'); 
       }
     });
   } else {

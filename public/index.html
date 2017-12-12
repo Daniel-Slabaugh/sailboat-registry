@@ -1,9 +1,175 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Sailboat Registry</title>
-</head>
-<body>
-  <h1>Hello World</h1>
-</body>
-</html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="floatgrid.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    <title>Sailboat Registry</title>
+  </head>
+  <body class="container color-rotate">
+
+    <div class="navbar" id="navbar">
+      <button class="btn-nav" id="nav-home" type="button">Home</button>
+      <button class="btn-nav" id="nav-search" type="button">Search</button>
+      <button class="btn-nav" id="nav-profile" type="button">Your Sailboats</button>
+    </div>
+
+    <div class="row" id="landing-page">
+      <div class="col-4">
+        <img src="main.jpg" alt="Picture not loading" style="height:300px">
+      </div> 
+      <div class="col-4">
+        <h2 class="text-center">Welcome to your sailboat's home!</h2> 
+        <form id="login">
+          <label for="emailLogin">Email</label><br>
+          <input type="text" name="emailLogin" id="emailLogin" placeholder="Email" required><br>
+          <label for="passwordLogin">Password</label><br>
+          <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Password" required><br>
+          <button class="btn" type="submit">Login</button>
+          <button class="btn" id="btnSignup" type="button">Sign Up</button>
+        </form>
+        <br>
+      </div> <!-- col landing page -->
+      <div class="col-4">
+        <img src="sailboat-1.jpeg" alt="Picture not loading" style="height:300px">
+      </div> 
+    </div> <!-- row landing-page -->
+
+    <div class="row" id="signup-page">
+      <div class="col-3"><br></div>
+      <div class="col-6">
+        <h2 class="text-center">New user? Please sign up to enter paradise.</h2> 
+        <form id="signup">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" placeholder="Name" required><br>
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" placeholder="ilovesailboats@water.com" required><br>
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Password" required><br>
+          <label for="confirmPass">Password</label>
+          <input type="password" name="confirmPass" id="confirmPass" placeholder="Confirm Password" required><br>
+          <button class="btn btnCreateAccount" type="submit">Create Account</button>
+        </form>
+      </div> <!-- col signup page -->
+    </div> <!-- row signup-page -->
+
+    <div class="row" id="home-page">
+      <div class="col-3">
+        <h2 id="success-message"></h2>
+      </div>
+      <div class="col-6">
+        <div class="col-12"><br><br></div>
+        <div id="home-sailboats"></div>
+      </div> <!-- col home page -->
+      <div class="col-3">
+        <br><br>
+        <h4>You are logged in as</h4>
+        <p id="userInfo"></p>
+      </div>
+    </div> <!-- home page -->
+
+    <div class="row" id="register-page">
+      <div class="col-3"><br></div>
+      <div class="col-6">
+        <h2 class="text-center">Register your Sailboat</h2> 
+        <form id="register-sailboat">
+          <div class="group">
+            <label for="name">Sailboat Name</label>
+            <input type="text" name="name" id="name" placeholder="Carumba" required>
+          </div>    
+          <div class="group">
+            <label for="description">Describe your boat</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Hobie Cat 16" required>
+          </div>
+          <div class="group">
+            <label for="condiditon">Condition</label>
+            <input type="text" name="condition" id="condition" placeholder="Excellent/Good/Fair/Other" required>
+          </div>  
+          <div class="group">
+            <label for="year">Year</label>
+            <input type="text" name="year" id="year" placeholder="1984" required>
+          </div>  
+          <div class="group">
+            <label for="state">State (if in United States)</label>
+            <input type="text" name="state" id="state" placeholder="California" required>
+          </div>  
+          <div class="group">
+            <label for="picture">Link to Picture of Sailboat</label>
+            <input type="text" name="picture" id="picture" placeholder="https://imgur.com/sailboat" required>
+          </div> 
+          <button class="btn btnRegisterSailboats" type="submit">Register Sailboat</button>
+        </form>
+      </div> <!-- col register page -->
+    </div> <!-- row register page -->
+
+    <div class="row" id="edit-page">
+      <div class="col-3"><br></div>
+      <div class="col-6">
+        <h2 class="text-center">Edit your Sailboat</h2> 
+        <form id="edit-sailboat">
+          <div class="group">
+            <label for="nameE">Sailboat Name</label>
+            <input type="text" name="nameE" id="nameE" placeholder="Carumba" required>
+          </div>    
+          <div class="group">
+            <label for="descriptionE">Describe your boat</label>
+            <input type="text" name="descriptionE" id="descriptionE" placeholder="Hobie Cat 16" required>
+          </div>
+          <div class="group">
+            <label for="condiditon">Condition</label>
+            <input type="text" name="conditionE" id="conditionE" placeholder="Excellent/Good/Fair/Other" required>
+          </div>  
+          <div class="group">
+            <label for="yearE">Year</label>
+            <input type="text" name="yearE" id="yearE" placeholder="1984" required>
+          </div>  
+          <div class="group">
+            <label for="stateE">State (if in United States)</label>
+            <input type="text" name="stateE" id="stateE" placeholder="California" required>
+          </div>  
+          <div class="group">
+            <label for="pictureE">Link to Picture of Sailboat</label>
+            <input type="text" name="pictureE" id="pictureE" placeholder="https://imgur.com/sailboat" required>
+          </div> 
+          <button class="btn btnEditSailboats" type="submit">Change Sailboat Details</button>
+        </form>
+      </div> <!-- col edit page -->
+    </div> <!-- row edit page -->
+
+    <div class="row" id="search-page">
+      <div class="col-3"><br></div>
+      <div class="col-6">
+        <form id="search-form">
+          <h2>Search for Sailboats</h2>
+          <label for="search">Search by Name, Type, or Description</label>
+          <input type="text" name="search" id="search" placeholder="Hobie" required>
+          <button class="btn btnSearch" type="submit">Find the sailboats!</button>
+          <br><br>
+        </form>
+      </div>
+      <div class="col-12"> 
+        <div id="search-results"></div>
+      </div> <!-- col search page -->
+    </div> <!-- row search page -->
+
+    <div class="row" id="profile-page">
+      <div class="col-3"><br></div>
+      <div class="col-6">
+        <br><br>
+        <button class="btn btnCreate" id="btnCreate">Register a new Sailboat</button>
+      </div>
+      <div class="col-12">  
+        <br>
+        <h2>Your current Sailboats:</h2>      
+        <div id="owned-sailboats"></div>
+      </div> <!-- col profile page -->
+    </div> <!-- row proflie page -->
+  </body>
+</html>  

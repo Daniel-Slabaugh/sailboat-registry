@@ -1,0 +1,100 @@
+/* standard colors: 
+  white: rgba(253, 242, 202, 1)
+  red:   rgba(172, 60, 48, 1) 
+  blue:  rgba(20, 24, 42, 1)
+  teal:  rgba(101, 150, 143, 1) 
+  sky:   rgba(198, 233, 229, 1)
+*/
+
+.color-rotate {
+  transition: background 1.5s linear, color 1.5s linear;
+  background-size: cover;                 
+  background-repeat: no-repeat;
+  background: opacity(.3);
+}
+
+/* Add a black background color to the top navigation */
+.navbar {
+  background-color: rgba(20, 24, 42, 1);
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.navbar button {
+  float: left;
+  display: block;
+  color: rgba(172, 60, 48, 1) ;
+  background-color: rgba(20, 24, 42, 1);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border: hidden;
+  outline: 0;
+  border-radius: 0;
+}
+
+/* Change the color of links on hover */
+.navbar button:hover {
+  background-color: rgba(253, 242, 202, 1);
+  color: rgba(20, 24, 42, 1);
+}
+
+/* Add a color to the active/current link */
+.navbar button.selected {
+  background-color: rgba(253, 242, 202, 1);
+  color: rgba(20, 24, 42, 1);
+}
+
+.btn {
+  width: 100%;
+  background-color: rgba(198, 233, 229, 1);
+  color: rgba(172, 60, 48, 1);
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.btn:hover {
+  background-color: rgba(172, 60, 48, 1);
+  color: rgba(198, 233, 229, 1);
+}
+
+input {
+  width: 100%;
+  border-radius: 5px;
+  height: 30px;
+  background-color: rgba(253, 242, 202, 1);
+  color: rgba(20, 24, 42, 1);
+  margin-bottom: 5px;
+}
+
+h2 {
+  text-align: center;
+}
+
+h4 {
+  margin: 0px;
+}
+
+p {
+  margin-top: 0px;
+}
+
+img {
+  width:100%; 
+}
+
+#home-sailboats img {
+  margin-top:10px;
+}
+
+.btnCreate, .btnSearch {
+  font-size: 20px;
+}
+
+.btnEditSailboats, .btnRegisterSailboats {
+  background-color: rgba(253, 242, 202, 1);
+}

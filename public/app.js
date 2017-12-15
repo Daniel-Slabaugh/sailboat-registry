@@ -391,9 +391,9 @@ function changeSailboat(id) {
 
 function colorRotator(backgroundColors, textColors)  {
 
-  var itemInterval = 5000;
+  var itemInterval = 15000;
   var numberOfItems = backgroundColors.length;
-  var currentItem = 0;
+  var currentItem = 2;
 
   var background = $('.color-rotate')
   background.css("background-color", backgroundColors[currentItem]);
@@ -401,8 +401,8 @@ function colorRotator(backgroundColors, textColors)  {
   var infiniteLoop = setInterval(function() {
     console.log(background.attr("class"));
     if(background.attr("class") == "container color-rotate") {
-      if (currentItem == numberOfItems - 1) {
-        currentItem = 0;
+      if (currentItem == numberOfItems - 2) {
+        currentItem = 2;
       } else {
         currentItem++;
       }

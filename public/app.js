@@ -20,7 +20,8 @@ $(document).ready(function() {
                     "rgba(172, 60, 48, 1)",
                     "rgba(172, 60, 48, 1)"]
 
-  colorRotator(backgroundColors, textColors);
+  $(".container").css("background-color", backgroundColors[1]);
+  $(".container").css("color", textColors[1]);
   showCurrentPage("landing-page");
 
   $("#btnSignup").click(function(e) {
@@ -387,27 +388,4 @@ function changeSailboat(id) {
   $("#pictureE").val(sailboat.picture);
   $("#edit-sailboat").attr("name", id);
   showCurrentPage("edit-page", "navbar");
-}
-
-function colorRotator(backgroundColors, textColors)  {
-
-  var itemInterval = 15000;
-  var numberOfItems = backgroundColors.length;
-  var currentItem = 2;
-
-  var background = $('.color-rotate')
-  background.css("background-color", backgroundColors[currentItem]);
-  background.css("color", textColors[currentItem]);
-  var infiniteLoop = setInterval(function() {
-    console.log(background.attr("class"));
-    if(background.attr("class") == "container color-rotate") {
-      if (currentItem == numberOfItems - 2) {
-        currentItem = 2;
-      } else {
-        currentItem++;
-      }
-      background.css("background-color", backgroundColors[currentItem]);
-      background.css("color", textColors[currentItem]);    
-    }   
-  }, itemInterval);
 }

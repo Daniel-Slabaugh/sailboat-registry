@@ -6,7 +6,7 @@
   sky:   rgba(198, 233, 229, 1)
 */
 
-.color-rotate {
+.container {
   background-size: cover;                 
   background-repeat: no-repeat;
   background: opacity(.3);

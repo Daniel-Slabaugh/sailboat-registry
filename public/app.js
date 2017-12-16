@@ -10,10 +10,10 @@ var state = {
 
 $(document).ready(function() {
   var backgroundColors = ["rgba(253, 242, 202, 1)", 
-                "rgba(172, 60, 48, 1)", 
-                "rgba(20, 24, 42, 1)",
-                "rgba(101, 150, 143, 1)",
-                "rgba(198, 233, 229, 1)"];
+                          "rgba(172, 60, 48, 1)", 
+                          "rgba(20, 24, 42, 1)",
+                          "rgba(101, 150, 143, 1)",
+                          "rgba(198, 233, 229, 1)"];
   var textColors = ["rgba(20, 24, 42, 1)", 
                     "rgba(20, 24, 42, 1)", 
                     "rgba(253, 242, 202, 1)", 

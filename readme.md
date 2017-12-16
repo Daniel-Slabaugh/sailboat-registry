@@ -14,17 +14,17 @@
 Sailboat registry allows you to register your sailboat and search for other registered sailboats from across the country.
 
 ## Landing page
-![Welcome](Screenshots/landing-page.png)
+![Welcome](screenshots/landing-page.png)
 
 ## Signin page
-![Signin](Screenshots/signin-page.png)
+![Signin](screenshots/signin-page.png)
 
 ## Home page
-![Home](Screenshots/home-page.png)
+![Home](screenshots/home-page.png)
 
 ## Search page
-![Search](Screenshots/search-page.png)
+![Search](screenshots/search-page.png)
 
 ## Results page
-![Results](Screenshots/register-page.png)
+![Results](screenshots/register-page.png)
 

@@ -17,7 +17,7 @@ $(document).ready(function() {
   var textColors = ["rgba(20, 24, 42, 1)", 
                     "rgba(20, 24, 42, 1)", 
                     "rgba(253, 242, 202, 1)", 
-                    "rgba(172, 60, 48, 1)",
+                    "rgba(172, 60, 48, 1)",x
                     "rgba(172, 60, 48, 1)"]
 
   $(".container").css("background-color", backgroundColors[1]);

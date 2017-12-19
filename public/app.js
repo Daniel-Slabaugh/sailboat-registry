@@ -17,7 +17,7 @@ $(document).ready(function() {
   var textColors = ["rgba(20, 24, 42, 1)", 
                     "rgba(20, 24, 42, 1)", 
                     "rgba(253, 242, 202, 1)", 
-                    "rgba(172, 60, 48, 1)",x
+                    "rgba(172, 60, 48, 1)",
                     "rgba(172, 60, 48, 1)"]
 
   $(".container").css("background-color", backgroundColors[1]);
@@ -89,7 +89,7 @@ $(document).ready(function() {
   $("#register-sailboat").submit(function(e) {
     e.preventDefault();
     let sailboat = {};
-    sailboat.name = $("#name").val().trim();
+    sailboat.name = $("#regName").val().trim();
     sailboat.owner = state.owner;
     sailboat.description = $("#description").val().trim();
     sailboat.condition = $("#condition").val().trim();
@@ -111,7 +111,7 @@ $(document).ready(function() {
     $(".container").css("background-color", backgroundColors[5]);
     $(".container").css("color", textColors[5]);
     let sailboat = {};
-    sailboat.name = $("#nameE").val().trim();
+    sailboat.name = $("#editName").val().trim();
     sailboat.owner = state.owner;
     sailboat.description = $("#descriptionE").val().trim();
     sailboat.condition = $("#conditionE").val().trim();

@@ -70,6 +70,12 @@ input {
   margin-bottom: 5px;
 }
 
+.group {
+  border-radius: 5px;
+  border-color: grey;
+  border-width: 2px;
+}
+
 h2 {
   text-align: center;
 }

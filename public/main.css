@@ -10,14 +10,15 @@
   background-size: cover;                 
   background-repeat: no-repeat;
   background: opacity(.3);
+  margin: 0px;
 }
 
 /* Add a black background color to the top navigation */
 .navbar {
   background-color: rgba(20, 24, 42, 1);
   overflow: hidden;
-  position:absolute;
-  width:100%;
+  position: absolute;
+  width: 100%;
 }
 
 /* Style the links inside the navigation bar */

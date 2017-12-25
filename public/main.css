@@ -101,7 +101,3 @@ img {
 .btnCreate, .btnSearch {
   font-size: 20px;
 }
-
-.btnEditSailboats, .btnRegisterSailboats {
-  background-color: rgba(253, 242, 202, 1);
-}

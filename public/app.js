@@ -64,8 +64,8 @@ $(document).ready(function() {
 
   $("#nav-search").click(function(e) {
     e.preventDefault();
-    $(".container").css("background-color", backgroundColors[3]);
-    $(".container").css("color", textColors[3]);
+    $(".container").css("background-color", backgroundColors[1]);
+    $(".container").css("color", textColors[1]);
     clearSearch();
     showCurrentPage("search-page", "navbar");
   });
@@ -78,15 +78,15 @@ $(document).ready(function() {
 
   $("#nav-profile").click(function(e) {
     e.preventDefault();
-    $(".container").css("background-color", backgroundColors[0]);
-    $(".container").css("color", textColors[0]);
+    $(".container").css("background-color", backgroundColors[1]);
+    $(".container").css("color", textColors[1]);
     displaySailboats(state.ownedSailboats, "profile-page", "owned-sailboats");
   });
 
   $("#btnCreate").click(function(e) {
     e.preventDefault();
-    $(".container").css("background-color", backgroundColors[3]);
-    $(".container").css("color", textColors[3]);
+    $(".container").css("background-color", backgroundColors[1]);
+    $(".container").css("color", textColors[1]);
     showCurrentPage("register-page", "navbar");
   });
 
@@ -105,15 +105,15 @@ $(document).ready(function() {
 
   $(document).on("click", ".btnEdit", function() {
     var id = $(this).attr("name");
-    $(".container").css("background-color", backgroundColors[4]);
-    $(".container").css("color", textColors[4]);
+    $(".container").css("background-color", backgroundColors[1]);
+    $(".container").css("color", textColors[1]);
     changeSailboat(id);
   });
 
   $("#edit-sailboat").submit(function(e) {
     e.preventDefault();
-    $(".container").css("background-color", backgroundColors[5]);
-    $(".container").css("color", textColors[5]);
+    $(".container").css("background-color", backgroundColors[1]);
+    $(".container").css("color", textColors[1]);
     let sailboat = {};
     sailboat.name = $("#editName").val().trim();
     sailboat.owner = state.owner;

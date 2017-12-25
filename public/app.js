@@ -51,6 +51,10 @@ $(document).ready(function() {
     loginUser(user);
   });
 
+  $("#btnLogout").click(function(e) {
+    showCurrentPage("landing-page");
+  });
+
   $("#nav-home").click(function(e) {
     e.preventDefault();
     $(".container").css("background-color", backgroundColors[1]);

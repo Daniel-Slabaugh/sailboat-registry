@@ -11,14 +11,16 @@
   background-repeat: no-repeat;
   background: opacity(.3);
   margin: 0px;
+  margin-top:50px;
 }
 
 /* Add a black background color to the top navigation */
 .navbar {
   background-color: rgba(20, 24, 42, 1);
   overflow: hidden;
-  position: absolute;
   width: 100%;
+  position: fixed;
+  top: 0px;
 }
 
 /* Style the links inside the navigation bar */

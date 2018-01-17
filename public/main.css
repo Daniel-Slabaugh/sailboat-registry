@@ -85,6 +85,10 @@ h2, h3 {
   text-align: center;
 }
 
+h2 {
+  margin-top: 0px;
+}
+
 h4 {
   margin: 0px;
 }
@@ -97,10 +101,21 @@ img {
   width:100%; 
 }
 
+#welcome-text {
+  text-align: center;
+}
+
 #home-sailboats img {
   margin-top:10px;
 }
 
 .btnCreate, .btnSearch {
   font-size: 20px;
+}
+
+#btnLogin {
+  margin-bottom: 5px;
+}
+#btnSignup {
+  margin-top: 0px;
 }

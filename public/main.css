@@ -85,10 +85,6 @@ h2, h3 {
   text-align: center;
 }
 
-h2 {
-  margin-top: 0px;
-}
-
 h4 {
   margin: 0px;
 }
@@ -99,6 +95,10 @@ p {
 
 img {
   width:100%; 
+}
+
+#greeting {
+  margin-top: 0px;
 }
 
 #welcome-text {
